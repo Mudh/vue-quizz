@@ -43,8 +43,7 @@ export default {
         password: this.password,
         confirmPassword: this.confirmPassword
       };
-      console.log('sign up data', formData);
-      // this.$store.dispatch('signup', formData);
+      this.$store.dispatch('auth/signup', formData);
     }
   }
 };
