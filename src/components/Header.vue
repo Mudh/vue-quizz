@@ -2,10 +2,13 @@
   <header>
     <ul>
       <li>
-        <router-link to="/">Home</router-link>
+        <router-link to="/" exact>Home</router-link>
       </li>
       <li>
-        <router-link to="/about">About</router-link>
+        <router-link to="/signup">Sign Up</router-link>
+      </li>
+      <li>
+        <router-link to="/signin">Sign In</router-link>
       </li>
     </ul>
   </header>
@@ -24,7 +27,7 @@ export default {
 @import '../styles/variables.scss';
 
 header {
-  border-bottom: 1px solid #eaecef;
+  border-bottom: 1px solid $headerBorder;
   ul {
     display: flex;
     background-color: #ffffff;
