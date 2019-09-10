@@ -32,5 +32,8 @@ export default {
   //   rgba(44, 62, 80, 1) 0%,
   //   rgba(36, 68, 101, 1) 100%
   // );
+  h3 {
+    margin: 40px 0 0;
+  }
 }
 </style>

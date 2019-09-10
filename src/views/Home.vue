@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <HomeVisitor msg="Welcome to vue.js quizz" />
   </div>
 </template>
