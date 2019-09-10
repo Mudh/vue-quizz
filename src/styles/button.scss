@@ -1,0 +1,30 @@
+// FORM
+@import "../styles/variables.scss";
+
+button {
+  display: inline-block;
+  margin-top: 3%;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background-color: $mainColor1;
+  padding: 0.8rem 1.6rem;
+  border-radius: 4px;
+  transition: background-color 0.1s ease;
+  box-sizing: border-box;
+  border-bottom: 1px solid $mainColor1;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:active {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}

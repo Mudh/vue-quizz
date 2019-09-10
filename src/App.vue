@@ -16,7 +16,15 @@ export default {
 <style lang="scss">
 @import 'normalize-scss';
 @include normalize();
+
 @import './styles/variables.scss';
+@import './styles/button.scss';
+
+html,
+body,
+#app {
+  height: 100%;
+}
 
 #app {
   font-family: $mainFont;
@@ -26,12 +34,7 @@ export default {
   color: $mainColor2;
   font-size: 1em;
   font-weight: 500;
-  // background: rgb(44, 62, 80);
-  // background: linear-gradient(
-  //   45deg,
-  //   rgba(44, 62, 80, 1) 0%,
-  //   rgba(36, 68, 101, 1) 100%
-  // );
+
   h3 {
     margin: 40px 0 0;
   }
