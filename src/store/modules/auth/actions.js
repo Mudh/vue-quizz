@@ -1,7 +1,7 @@
 import axios from 'axios';
 import axiosAuth from '../../../utils/axios-auth';
 import router from '../../../router';
-import apiKey from '../../../../local.config';
+import { apiKey } from '../../../../local.config';
 
 const setLogoutTimer = ({ commit }, expirationTime) => {
   setTimeout(() => {
