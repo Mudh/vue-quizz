@@ -21,15 +21,15 @@ const signup = ({ commit, dispatch }, authData) => {
         token: res.data.idToken,
         userId: res.data.localId,
       });
-      const now = new Date();
-      const expirationDate = new Date(
-        now.getTime() + res.data.expiresIn * 1000,
-      );
+      const now = new Date().getTime();
+      const expirationDate = now + res.data.expiresIn * 100;
+
       localStorage.setItem('token', res.data.idToken);
       localStorage.setItem('userId', res.data.localId);
       localStorage.setItem('expirationDate', expirationDate);
       dispatch('storeUser', authData);
-      dispatch('setLogoutTimer', res.data.expiresIn);
+      dispatch('setLogoutTimer', res.data.expiresIn * 100);
+      router.push('/');
       console.log('response', res);
     })
     .catch(error => console.log('error', error));
@@ -50,14 +50,14 @@ const login = ({ commit, dispatch }, authData) => {
         token: res.data.idToken,
         userId: res.data.localId,
       });
-      const now = new Date();
-      const expirationDate = new Date(
-        now.getTime() + res.data.expiresIn * 1000,
-      );
+      const now = new Date().getTime();
+      const expirationDate = now + res.data.expiresIn * 100;
+
       localStorage.setItem('token', res.data.idToken);
       localStorage.setItem('userId', res.data.localId);
       localStorage.setItem('expirationDate', expirationDate);
-      dispatch('setLogoutTimer', res.data.expiresIn);
+      dispatch('setLogoutTimer', res.data.expiresIn * 100);
+      router.push('/');
       console.log('response', res);
     })
     .catch(error => console.log('error', error));
@@ -78,8 +78,8 @@ const stayLogged = ({ commit }) => {
   if (!token) {
     return;
   }
-  const expirationDate = localStorage.getItem('expirationDate');
-  const now = new Date();
+  const expirationDate = parseInt(localStorage.getItem('expirationDate'), 10);
+  const now = new Date().getTime();
   if (now >= expirationDate) {
     return;
   }
