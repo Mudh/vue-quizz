@@ -4,10 +4,10 @@
       <li>
         <router-link to="/" exact>Home</router-link>
       </li>
-      <li>
+      <li v-if="!isAuthenticated">
         <router-link to="/signup">Sign Up</router-link>
       </li>
-      <li>
+      <li v-if="!isAuthenticated">
         <router-link to="/signin">Sign In</router-link>
       </li>
     </ul>
@@ -15,10 +15,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Header',
   props: {
     msg: String
+  },
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    })
   }
 };
 </script>
