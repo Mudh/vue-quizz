@@ -32,7 +32,7 @@ export default {
         password: this.password
       };
       console.log('signin data', formData);
-      this.$store.dispatch('login', {
+      this.$store.dispatch('auth/login', {
         email: formData.email,
         password: formData.password
       });
