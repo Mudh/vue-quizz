@@ -19,13 +19,13 @@ const signup = ({ commit, dispatch }, authData) => {
         userId: res.data.localId,
       });
       const now = new Date().getTime();
-      const expirationDate = now + res.data.expiresIn * 100;
+      const expirationDate = now + res.data.expiresIn * 1000;
 
       localStorage.setItem('token', res.data.idToken);
       localStorage.setItem('userId', res.data.localId);
       localStorage.setItem('expirationDate', expirationDate);
       dispatch('storeSignupUser', authData);
-      dispatch('setLogoutTimer', res.data.expiresIn * 100);
+      dispatch('setLogoutTimer', res.data.expiresIn * 1000);
       router.push('/');
       console.log('response', res, new Date());
     })
@@ -54,9 +54,8 @@ const storeSignupUser = ({ dispatch, state }, userData) => {
   };
   axios
     .post(`/users.json?auth=${state.idToken}`, user)
-    .then((res) => {
+    .then(() => {
       dispatch('storeUser', user);
-      console.log('storeSignupUser', user, res);
     })
     .catch(error => console.log(error));
 };
@@ -79,15 +78,14 @@ const login = ({ commit, dispatch }, authData) => {
         userId: res.data.localId,
       });
       const now = new Date().getTime();
-      const expirationDate = now + res.data.expiresIn * 100;
+      const expirationDate = now + res.data.expiresIn * 1000;
 
       localStorage.setItem('token', res.data.idToken);
       localStorage.setItem('userId', res.data.localId);
       localStorage.setItem('expirationDate', expirationDate);
-      dispatch('setLogoutTimer', res.data.expiresIn * 100);
+      dispatch('setLogoutTimer', res.data.expiresIn * 1000);
       dispatch('fetchUser', authData.email);
       router.push('/');
-      console.log('response', res);
     })
     .catch(error => console.log('error', error));
 };
@@ -97,7 +95,6 @@ const storeUser = ({ commit, state }, userData) => {
     return;
   }
   commit('storeUser', userData);
-  console.log('state user', state.user);
 };
 
 const fetchUser = ({ state, dispatch }, val) => {
@@ -110,9 +107,6 @@ const fetchUser = ({ state, dispatch }, val) => {
       const userValues = Object.values(res.data)[0];
       const user = userValues;
       dispatch('storeUser', user);
-
-      console.log('fetch', userValues);
-      console.log('stay logged', state.user);
     });
 };
 
