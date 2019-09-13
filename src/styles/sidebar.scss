@@ -2,7 +2,6 @@
 
 @import "./functions";
 @import "./variables";
-// @import "./styles/keyframes";
 
 .sidebar {
   background: rgb(44, 62, 80);
@@ -58,14 +57,21 @@
       font-size: rem(18);
     }
     svg {
+      fill: #ffffff;
       margin-right: rem(17);
       width: 25px;
       height: 25px;
     }
   }
 
-  svg {
-    width: 30px;
+  .item {
+    color: $mainColor1;
+    font-weight: 600;
+    font-size: 1.2em;
+
+    span {
+      font-weight: 500;
+    }
   }
 
   &__bottom {
@@ -75,6 +81,7 @@
     align-items: center;
     height: calc(100% - 174px);
   }
+
   &__countdown {
     display: flex;
     justify-content: center;

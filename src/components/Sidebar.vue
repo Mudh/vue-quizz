@@ -5,30 +5,48 @@
         <h2>Hi {{user.nickname}}!</h2>
         <ul class="sidebar__party">
           <li class="sidebar__items">
-            <!-- <Credits /> -->
-            <span class="logo__commentary">x{{user.nb_games}} Parties</span>
+            <Credits />
+            <span class="item">
+              x{{user.nb_games}}
+              <span>Parties</span>
+            </span>
           </li>
           <li class="sidebar__items">
-            <!-- <Score /> -->
-            <span class="logo__commentary">{{user.nb_points}} Points</span>
+            <Score />
+            <span class="item">
+              {{user.nb_points}}
+              <span>Points</span>
+            </span>
           </li>
         </ul>
         <ul class="sidebar__jokers">
           <li class="sidebar__items">
-            <!-- <Skip /> -->
-            <span class="logo__commentary">x{{user.joker_skip}} Skip</span>
+            <Skip />
+            <span class="item">
+              x{{user.joker_skip}}
+              <span>Skip</span>
+            </span>
           </li>
           <li class="sidebar__items">
-            <!-- <Revive /> -->
-            <span class="logo__commentary">x{{user.joker_revive}} Revive</span>
+            <Revive />
+            <span class="item">
+              x{{user.joker_revive}}
+              <span>Revive</span>
+            </span>
           </li>
           <li class="sidebar__items">
-            <!-- <FiftyFifty /> -->
-            <span class="logo__commentary">x{{user.joker_5050}} 50/50</span>
+            <FiftyFifty />
+            <span class="item">
+              x{{user.joker_5050}}
+              <span>50/50</span>
+            </span>
           </li>
           <li class="sidebar__items">
-            <!-- <Timer /> -->
-            <span class="logo__commentary">x{{user.joker_timer}} Timer</span>
+            <Timer />
+            <span class="item">
+              x{{user.joker_timer}}
+              <span>Timer</span>
+            </span>
           </li>
         </ul>
       </div>
@@ -41,9 +59,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Credits from '../components/icons/Credits';
+import Score from '../components/icons/Score';
+import Skip from '../components/icons/Skip';
+import Revive from '../components/icons/Revive';
+import FiftyFifty from '../components/icons/FiftyFifty';
+import Timer from '../components/icons/Timer';
 
 export default {
   name: 'Sidebar',
+  components: { Credits, Score, Skip, Revive, FiftyFifty, Timer },
   computed: {
     ...mapGetters({
       user: 'auth/user'
