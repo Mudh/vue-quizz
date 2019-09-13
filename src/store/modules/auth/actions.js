@@ -27,14 +27,42 @@ const signup = ({ commit, dispatch }, authData) => {
       localStorage.setItem('token', res.data.idToken);
       localStorage.setItem('userId', res.data.localId);
       localStorage.setItem('expirationDate', expirationDate);
-      dispatch('storeUser', authData);
+      dispatch('storeSignupUser', authData);
       dispatch('setLogoutTimer', res.data.expiresIn * 100);
       router.push('/');
-      console.log('response', res);
+      console.log('response', res, new Date());
     })
     .catch(error => console.log('error', error));
 };
 
+const storeSignupUser = ({ dispatch, state }, userData) => {
+  if (!state.idToken) {
+    return;
+  }
+  const userBirth = new Date();
+  const user = {
+    created_at: userBirth,
+    updated_time: userBirth,
+    email: userData.email,
+    nickname: userData.nickname,
+    firstname: '',
+    lastname: '',
+    description: '',
+    joker_5050: 2,
+    joker_revive: 2,
+    joker_skip: 2,
+    joker_timer: 2,
+    nb_games: 2,
+    nb_points: 0,
+  };
+  axios
+    .post(`/users.json?auth=${state.idToken}`, user)
+    .then((res) => {
+      dispatch('storeUser', user);
+      console.log('storeSignupUser', user, res);
+    })
+    .catch(error => console.log(error));
+};
 const login = ({ commit, dispatch }, authData) => {
   axiosAuth
     .post(
