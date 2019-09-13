@@ -10,12 +10,15 @@
       <li v-if="!isAuthenticated">
         <router-link to="/signin">Sign In</router-link>
       </li>
+      <li v-if="isAuthenticated">
+        <button @click="logout">Logout</button>
+      </li>
     </ul>
   </header>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Header',
@@ -26,6 +29,11 @@ export default {
     ...mapGetters({
       isAuthenticated: 'auth/isAuthenticated'
     })
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+    }
   }
 };
 </script>
@@ -44,10 +52,12 @@ header {
     justify-content: flex-end;
     align-items: center;
     margin: 0;
+
     li {
       display: inline-block;
       margin: 0 0.6em;
       font-weight: 500;
+
       a {
         color: $mainColor2;
         text-decoration: none;
@@ -56,6 +66,24 @@ header {
         &.router-link-exact-active {
           border-bottom: 3px solid $mainColor1;
           padding-bottom: 3px;
+        }
+      }
+
+      button {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        border-radius: 0;
+        background-color: transparent;
+        padding: 0;
+        color: $mainColor2;
+        font-size: 1em;
+        font-family: $mainFont;
+        font-weight: 500;
+
+        &:hover {
+          color: $mainColor1;
         }
       }
     }
