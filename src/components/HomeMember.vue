@@ -8,6 +8,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Sidebar from './Sidebar';
 
 export default {
   name: 'HomeMember',
@@ -29,9 +30,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../styles/variables.scss';
-
 .welcome {
+  flex: 1;
   margin-top: 15%;
 }
 </style>

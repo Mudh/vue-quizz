@@ -41,5 +41,9 @@ body,
   h3 {
     margin: 40px 0 0;
   }
+
+  .home, .signup, .signin {
+    height: calc(100% - 61px);
+  }
 }
 </style>
