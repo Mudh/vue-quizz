@@ -2,7 +2,7 @@
   <div class="home">
     <HomeVisitor v-if="!isAuthenticated" msg="Welcome to vue.js quizz" />
     <HomeMember v-if="isAuthenticated" msg="Start the quizz !" />
-    <Sidebar></Sidebar>
+    <Sidebar v-if="isAuthenticated" />
   </div>
 </template>
 
@@ -28,10 +28,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" .scoped>
 @import '../styles/variables.scss';
 
 .home {
   display: flex;
+  justify-content: center;
 }
 </style>
