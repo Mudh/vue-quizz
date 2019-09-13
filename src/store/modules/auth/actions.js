@@ -1,13 +1,10 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import axiosAuth from '../../../utils/axios-auth';
 import router from '../../../router';
 import { apiKey } from '../../../../local.config';
 
-const setLogoutTimer = ({ commit }, expirationTime) => {
-  setTimeout(() => {
-    commit('clearAuthData');
-  }, expirationTime);
-};
+// REGISTER NEW USER //////////////////////////////////////
 
 const signup = ({ commit, dispatch }, authData) => {
   axiosAuth
@@ -63,6 +60,9 @@ const storeSignupUser = ({ dispatch, state }, userData) => {
     })
     .catch(error => console.log(error));
 };
+
+// LOGIN USER ////////////////////////////////////////////
+
 const login = ({ commit, dispatch }, authData) => {
   axiosAuth
     .post(
@@ -85,38 +85,68 @@ const login = ({ commit, dispatch }, authData) => {
       localStorage.setItem('userId', res.data.localId);
       localStorage.setItem('expirationDate', expirationDate);
       dispatch('setLogoutTimer', res.data.expiresIn * 100);
+      dispatch('fetchUser', authData.email);
       router.push('/');
       console.log('response', res);
     })
     .catch(error => console.log('error', error));
 };
 
-const storeUser = ({ state }, userData) => {
+const storeUser = ({ commit, state }, userData) => {
+  if (!state.idToken) {
+    return;
+  }
+  commit('storeUser', userData);
+  console.log('state user', state.user);
+};
+
+const fetchUser = ({ state, dispatch }, val) => {
   if (!state.idToken) {
     return;
   }
   axios
-    .post(`/users.json?auth=${state.idToken}`, userData)
-    .then(res => console.log(res))
-    .catch(error => console.log(error));
+    .get(`/users.json?orderBy="email"&equalTo="${val}"`)
+    .then((res) => {
+      const userValues = Object.values(res.data)[0];
+      const user = userValues;
+      dispatch('storeUser', user);
+
+      console.log('fetch', userValues);
+      console.log('stay logged', state.user);
+    });
 };
 
-const stayLogged = ({ commit }) => {
+// AUTO LOGIN AND LOGOUT /////////////////////////////////////
+
+const stayLogged = ({ commit, dispatch }) => {
   const token = localStorage.getItem('token');
   if (!token) {
     return;
   }
+
   const expirationDate = parseInt(localStorage.getItem('expirationDate'), 10);
   const now = new Date().getTime();
   if (now >= expirationDate) {
     return;
   }
+
   const userId = localStorage.getItem('userId');
   commit('authUser', {
     token,
     userId,
   });
+
+  const decodedToken = jwtDecode(token);
+  dispatch('fetchUser', decodedToken.email);
 };
+
+const setLogoutTimer = ({ commit }, expirationTime) => {
+  setTimeout(() => {
+    commit('clearAuthData');
+  }, expirationTime);
+};
+
+// LOGOUT ////////////////////////////////////////////////////
 
 const logout = ({ commit }) => {
   commit('clearAuthData');
@@ -126,23 +156,12 @@ const logout = ({ commit }) => {
   router.push('/signin');
 };
 
-const fetchUser = ({ state }) => {
-  if (!state.idToken) {
-    return;
-  }
-  axios
-    .get(`/users.json?auth=${state.idToken}`)
-    .then((res) => {
-      console.log('created', res);
-    })
-    .catch(error => console.log(error));
-};
-
 export default {
   setLogoutTimer,
   signup,
   login,
   storeUser,
+  storeSignupUser,
   stayLogged,
   logout,
   fetchUser,

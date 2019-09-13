@@ -7,10 +7,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'HomeMember',
   props: {
     msg: String
+  },
+  computed: {
+    ...mapGetters({
+      user: 'auth/user'
+    })
   },
   methods: {
     subscribeQuiz() {
