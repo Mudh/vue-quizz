@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <HomeVisitor v-if="!isAuthenticated" msg="Welcome to vue.js quizz" />
-    <HomeMember v-if="isAuthenticated" msg="Start the quizz !" />
+    <HomeMember v-if="isAuthenticated && !isQuizzStart" msg="Start the quizz !" />
+    <Quizz v-if="isAuthenticated && isQuizzStart" msg="Start the quizz !" />
     <Sidebar v-if="isAuthenticated" />
   </div>
 </template>
@@ -11,6 +12,7 @@
 import HomeVisitor from '@/components/homeVisitor.vue';
 import HomeMember from '@/components/homeMember.vue';
 import Sidebar from '@/components/sidebar.vue';
+import Quizz from '@/components/quizz.vue';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -18,11 +20,13 @@ export default {
   components: {
     HomeVisitor,
     HomeMember,
-    Sidebar
+    Sidebar,
+    Quizz
   },
   computed: {
     ...mapGetters({
-      isAuthenticated: 'auth/isAuthenticated'
+      isAuthenticated: 'auth/isAuthenticated',
+      isQuizzStart: 'quizz/isQuizzStart'
     })
   }
 };

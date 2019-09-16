@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     startQuizz() {
-      this.$router.push('quizz');
+      this.$store.dispatch('quizz/startQuizz');
     }
   }
 };
