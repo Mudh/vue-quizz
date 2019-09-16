@@ -4,6 +4,9 @@ import mutations from './mutations';
 
 const state = {
   isQuizzStart: false,
+  quizzQuestions: [],
+  stepNumber: 1,
+  questionNumber: 0,
 };
 
 export default {
