@@ -1,0 +1,130 @@
+@import "./variables";
+@import "./functions";
+
+.quizz {
+  display: flex;
+  flex: 1;
+  margin-top: 3%;
+  flex-direction: column;
+
+  &__footer {
+    display: flex;
+    margin-bottom: rem(40);
+    justify-content: center;
+    align-items: center;
+
+    .stop {
+      margin: 0 rem(20);
+    }
+
+    .primary.round {
+      margin: 0 rem(20);
+      padding: rem(20);
+      width: rem(80);
+      height: rem(80);
+      border-radius: 100%;
+
+      &:first-child {
+        padding: rem(24);
+      }
+      &:nth-child(2) {
+        padding: rem(22) rem(20);
+      }
+
+      svg {
+        width: rem(40);
+        height: rem(40);
+      }
+      &.isDisabled {
+        opacity: 0.4;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__question {
+    margin-top: rem(50);
+    font-size: rem(25);
+    color: $mainColor2;
+  }
+
+  &__breadcrumb {
+    display: block;
+    margin-top: rem(15);
+    font-size: rem(20);
+    color: $mainColor2;
+  }
+
+  &__answerList {
+    display: flex;
+    flex-direction: column;
+    padding: rem(45) rem(10);
+  }
+
+  &__answerItem {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: rem(25);
+    border: 1px solid $headerBorder;
+    border-radius: 3px;
+    box-shadow: 0 10px 25px 0 rgba($mainColor2, 0.3);
+    background: #ffffff;
+    padding: rem(20);
+    font-size: rem(23);
+    color: $mainColor2;
+    animation: opacity 0.5s linear forwards;
+
+    input {
+      position: absolute;
+      top: 17px;
+      left: 20px;
+      width: rem(25);
+      height: rem(25);
+      opacity: 0;
+      z-index: 1;
+      cursor: pointer;
+
+      &:checked + label:after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        left: 28px;
+        background: $mainColor1;
+        width: rem(18);
+        height: rem(18);
+        border-radius: 2px;
+      }
+    }
+
+    label {
+      margin-left: rem(50);
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 24px;
+        background: lighten($mainColor2, 65);
+        width: rem(26);
+        height: rem(26);
+        border-radius: 2px;
+      }
+    }
+
+    &--text {
+      position: static;
+      margin-top: rem(45);
+      border: none;
+      opacity: 1;
+      width: 100%;
+      height: auto;
+      cursor: text;
+      font-family: "Schoolbell", cursive;
+      padding: rem(20) rem(35);
+    }
+  }
+}
