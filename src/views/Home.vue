@@ -9,11 +9,11 @@
 
 <script>
 // @ is an alias to /src
-import HomeVisitor from '@/components/homeVisitor.vue';
-import HomeMember from '@/components/homeMember.vue';
-import Sidebar from '@/components/sidebar.vue';
-import Quizz from '@/components/quizz.vue';
 import { mapGetters } from 'vuex';
+import HomeVisitor from '../components/homeVisitor';
+import HomeMember from '../components/homeMember';
+import Sidebar from '../components/sidebar';
+import Quizz from '../components/quizz';
 
 export default {
   name: 'home',
