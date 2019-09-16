@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from './components/Header';
+import Header from './components/header';
 
 export default {
   components: { Header },
@@ -42,7 +42,9 @@ body,
     margin: 40px 0 0;
   }
 
-  .home, .signup, .signin {
+  .home,
+  .signup,
+  .signin {
     height: calc(100% - 61px);
   }
 }

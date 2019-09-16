@@ -8,9 +8,9 @@
 
 <script>
 // @ is an alias to /src
-import HomeVisitor from '@/components/HomeVisitor.vue';
-import HomeMember from '@/components/HomeMember.vue';
-import Sidebar from '@/components/Sidebar.vue';
+import HomeVisitor from '@/components/homeVisitor.vue';
+import HomeMember from '@/components/homeMember.vue';
+import Sidebar from '@/components/sidebar.vue';
 import { mapGetters } from 'vuex';
 
 export default {

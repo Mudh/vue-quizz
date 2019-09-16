@@ -59,12 +59,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Credits from '../components/icons/Credits';
-import Score from '../components/icons/Score';
-import Skip from '../components/icons/Skip';
-import Revive from '../components/icons/Revive';
-import FiftyFifty from '../components/icons/FiftyFifty';
-import Timer from '../components/icons/Timer';
+import Credits from '../components/icons/credits';
+import Score from '../components/icons/score';
+import Skip from '../components/icons/skip';
+import Revive from '../components/icons/revive';
+import FiftyFifty from '../components/icons/fiftyFifty';
+import Timer from '../components/icons/timer';
 
 export default {
   name: 'Sidebar',
