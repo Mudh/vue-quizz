@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="home--member">
     <img alt="Vue logo" src="../assets/logo.png" />
     <h1>{{ msg }}</h1>
     <p>
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.welcome {
+.home--member {
   flex: 1;
   margin-top: 15%;
   button {
