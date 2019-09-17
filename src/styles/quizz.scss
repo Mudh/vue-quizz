@@ -116,15 +116,25 @@
     }
 
     &--text {
-      position: static;
-      margin-top: rem(45);
-      border: none;
-      opacity: 1;
-      width: 100%;
       height: auto;
-      cursor: text;
-      font-family: "Schoolbell", cursive;
-      padding: rem(20) rem(35);
+      margin: rem(45) rem(10);
+      padding: 0;
+      border-radius: 5px;
+
+      input {
+        position: static;
+        border: none;
+        padding: rem(34);
+        width: 100%;
+        opacity: 1;
+        cursor: text;
+        border-radius: 5px;
+
+        &:focus {
+          outline: none;
+          background-color: lighten($mainColor1, 45);
+        }
+      }
     }
   }
 }

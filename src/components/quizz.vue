@@ -4,19 +4,30 @@
     <span
       class="quizz__breadcrumb"
     >Step {{step}} - Question {{questionNumber}} / {{questionsLengthByStep}}</span>
-    <ul class="quizz__answerList">
-      <li :key="answerItem.id" v-for="answerItem in answers" class="quizz__answerItem">
+    <form action>
+      <ul class="quizz__answerList" v-if="step < 3">
+        <li :key="answerItem.id" v-for="answerItem in answers" class="quizz__answerItem">
+          <input
+            type="radio"
+            :id="answerItem.answer"
+            :value="answerItem.answer"
+            :name="answerItem.answer"
+            @change="handleNextQuestion"
+            v-model="checkedAnswer"
+          />
+          <label class="task-label" :for="answerItem.answer">{{answerItem.answer}}</label>
+        </li>
+      </ul>
+      <fieldset class="quizz__answerItem quizz__answerItem--text" v-if="step === 3">
         <input
-          type="radio"
-          :id="answerItem.answer"
-          :value="answerItem.answer"
-          :name="answerItem.answer"
-          @change="handleNextQuestion"
-          v-model="checkedAnswer"
+          type="text"
+          autocomplete="off"
+          value="{answerValue}"
+          placeholder="Entrez votre réponse puis appuyez sur la touche entrée"
+          onChange="{this.handleChangeAnswer}"
         />
-        <label class="task-label" :for="answerItem.answer">{{answerItem.answer}}</label>
-      </li>
-    </ul>
+      </fieldset>
+    </form>
   </div>
 </template>
 
