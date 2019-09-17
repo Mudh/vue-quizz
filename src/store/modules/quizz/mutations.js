@@ -3,7 +3,15 @@ const startQuizz = (state) => {
 };
 
 const nextQuestion = (state) => {
-  state.questionNumber += 1;
+  switch (state.questionNumber) {
+    case 4:
+      state.stepNumber += 1;
+      state.questionNumber = 0;
+      break;
+
+    default:
+      state.questionNumber += 1;
+  }
 };
 
 export default {
