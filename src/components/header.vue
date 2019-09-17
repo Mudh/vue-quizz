@@ -41,16 +41,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/functions.scss';
 @import '../styles/variables.scss';
 
 header {
   border-bottom: 1px solid $headerBorder;
+
   ul {
     display: flex;
     background-color: #ffffff;
-    height: 40px;
+    height: 60px;
     position: relative;
-    padding: 10px 20px;
+    padding: 0 rem(20px);
     justify-content: flex-end;
     align-items: center;
     margin: 0;
