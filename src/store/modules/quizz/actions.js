@@ -11,6 +11,10 @@ const nextQuestion = ({ commit }) => {
   commit('nextQuestion');
 };
 
+const updateAnswerValue = ({ commit }, payload) => {
+  commit('updateAnswerValue', payload);
+};
+
 // FETCH QUESTIONS //////////////////////////////////////
 
 const fetchQuestions = ({ rootState, state }) => {
@@ -27,5 +31,8 @@ const fetchQuestions = ({ rootState, state }) => {
 };
 
 export default {
-  startQuizz, nextQuestion, fetchQuestions
+  startQuizz,
+  nextQuestion,
+  updateAnswerValue,
+  fetchQuestions
 };

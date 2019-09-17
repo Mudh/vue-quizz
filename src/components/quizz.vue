@@ -4,7 +4,7 @@
     <span
       class="quizz__breadcrumb"
     >Step {{step}} - Question {{questionNumber}} / {{questionsLengthByStep}}</span>
-    <form action>
+    <form @submit.prevent="handleNextQuestion">
       <ul class="quizz__answerList" v-if="step < 3">
         <li :key="answerItem.id" v-for="answerItem in answers" class="quizz__answerItem">
           <input
@@ -22,9 +22,8 @@
         <input
           type="text"
           autocomplete="off"
-          value="{answerValue}"
-          placeholder="Entrez votre réponse puis appuyez sur la touche entrée"
-          onChange="{this.handleChangeAnswer}"
+          placeholder="Write the answer and hit 'Enter' tab"
+          v-model="answerValue"
         />
       </fieldset>
     </form>
@@ -47,8 +46,17 @@ export default {
       questionNumber: 'quizz/questionNumber',
       questionsLengthByStep: 'quizz/questionsLengthByStep',
       question: 'quizz/question',
-      answers: 'quizz/answers'
-    })
+      answers: 'quizz/answers',
+      answerValue: 'quizz/answerValue'
+    }),
+    answerValue: {
+      get() {
+        return this.$store.getters['quiz/answerValue'];
+      },
+      set(value) {
+        this.$store.dispatch('quizz/updateAnswerValue', value);
+      }
+    }
   },
   methods: {
     handleNextQuestion() {

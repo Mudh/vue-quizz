@@ -19,6 +19,7 @@ const answers = (state) => {
   }
   return state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber].answer;
 };
+const answerValue = state => state.answervalue;
 
 
 export default {
@@ -27,5 +28,6 @@ export default {
   questionNumber,
   questionsLengthByStep,
   question,
-  answers
+  answers,
+  answerValue
 };

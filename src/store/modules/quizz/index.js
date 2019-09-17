@@ -7,6 +7,7 @@ const state = {
   quizzQuestions: [],
   stepNumber: 1,
   questionNumber: 0,
+  answerValue: ''
 };
 
 export default {

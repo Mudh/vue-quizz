@@ -14,6 +14,12 @@ const nextQuestion = (state) => {
   }
 };
 
+const updateAnswerValue = (state, payload) => {
+  state.answerValue = payload;
+};
+
 export default {
-  startQuizz, nextQuestion,
+  startQuizz,
+  nextQuestion,
+  updateAnswerValue
 };
