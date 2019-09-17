@@ -23,9 +23,23 @@ export default {
 @import './styles/variables.scss';
 @import './styles/button.scss';
 
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
 html,
 body,
 #app {
+  box-sizing: border-box;
   height: 100%;
 }
 
@@ -40,6 +54,11 @@ body,
 
   h3 {
     margin: 40px 0 0;
+  }
+
+  ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
 
   .home,
