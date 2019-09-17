@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import router from '../router.js';
+
 export default {
   data() {
     return {
@@ -44,6 +46,7 @@ export default {
         confirmPassword: this.confirmPassword
       };
       this.$store.dispatch('auth/signup', formData);
+      router.push('/');
     }
   }
 };

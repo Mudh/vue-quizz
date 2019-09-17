@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import router from '../router';
+
 export default {
   data() {
     return {
@@ -36,6 +38,7 @@ export default {
         email: formData.email,
         password: formData.password
       });
+      router.push('/');
     }
   }
 };

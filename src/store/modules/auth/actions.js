@@ -1,7 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import axiosAuth from '../../../utils/axios-auth';
-import router from '../../../router';
 import { apiKey } from '../../../../local.config';
 
 // REGISTER NEW USER //////////////////////////////////////
@@ -26,7 +25,6 @@ const signup = ({ commit, dispatch }, authData) => {
       localStorage.setItem('expirationDate', expirationDate);
       dispatch('storeSignupUser', authData);
       dispatch('setLogoutTimer', res.data.expiresIn * 1000);
-      router.push('/');
       console.log('response', res, new Date());
     })
     .catch(error => console.log('error', error));
@@ -85,7 +83,6 @@ const login = ({ commit, dispatch }, authData) => {
       localStorage.setItem('expirationDate', expirationDate);
       dispatch('setLogoutTimer', res.data.expiresIn * 1000);
       dispatch('fetchUser', authData.email);
-      router.push('/');
     })
     .catch(error => console.log('error', error));
 };
@@ -147,7 +144,6 @@ const logout = ({ commit }) => {
   localStorage.removeItem('expirationDate');
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
-  router.push('/signin');
 };
 
 export default {
