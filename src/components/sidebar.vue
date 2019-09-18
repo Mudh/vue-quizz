@@ -51,7 +51,9 @@
         </ul>
       </div>
       <div class="sidebar__bottom">
-        <Countdown />
+        <div class="sidebar__countdown">
+          <Countdown :date="TotalTime" v-if="isQuizzStart" />
+        </div>
       </div>
     </div>
   </aside>
@@ -78,9 +80,15 @@ export default {
     Timer,
     Countdown
   },
+  data() {
+    return {
+      TotalTime: new Date(new Date().getTime() + 11000).toString()
+    };
+  },
   computed: {
     ...mapGetters({
-      user: 'auth/user'
+      user: 'auth/user',
+      isQuizzStart: 'quizz/isQuizzStart'
     })
   }
 };

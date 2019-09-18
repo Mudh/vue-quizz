@@ -1,44 +1,40 @@
 <template>
-  <div class="sidebar__countdown">
-    <span>{{ display }}</span>
-  </div>
+  <span>{{minutes}}:{{ seconds }}</span>
 </template>
 
 
 <script>
-import { DateTime, Duration } from 'luxon';
+import twoDigits from '../utils/tools';
 
 export default {
   name: 'Coutdown',
+  mounted() {
+    window.setInterval(() => {
+      this.now = Math.trunc(new Date().getTime() / 1000);
+    }, 1000);
+  },
+  props: {
+    date: {
+      type: String
+    }
+  },
   data() {
     return {
-      now: DateTime.local(),
-      end: DateTime.local().plus({ seconds: 10 }),
-      tick: null
+      now: Math.trunc(new Date().getTime() / 1000)
     };
   },
-  watch: {
-    now() {
-      if (this.finished) {
-        clearInterval(this.tick);
-      }
-    }
-  },
   computed: {
-    remaining() {
-      return this.end.diff(this.now).toObject();
+    dateInMilliseconds() {
+      return Math.trunc(Date.parse(this.date) / 1000);
     },
-    display() {
-      return Duration.fromObject(this.remaining).toFormat('mm:ss');
+    seconds() {
+      return twoDigits((this.dateInMilliseconds - this.now) % 60);
     },
-    finished() {
-      return this.now >= this.end.minus({ seconds: 1 });
+    minutes() {
+      return twoDigits(
+        Math.trunc((this.dateInMilliseconds - this.now) / 60) % 60
+      );
     }
-  },
-  mounted() {
-    this.tick = setInterval(() => {
-      this.now = DateTime.local();
-    }, 100);
   }
 };
 </script>
