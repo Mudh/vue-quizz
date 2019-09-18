@@ -51,7 +51,7 @@
         </ul>
       </div>
       <div class="sidebar__bottom">
-        <!-- <Countdown /> -->
+        <Countdown />
       </div>
     </div>
   </aside>
@@ -65,6 +65,7 @@ import Skip from './icons/skip';
 import Revive from './icons/revive';
 import FiftyFifty from './icons/fiftyFifty';
 import Timer from './icons/timer';
+import Countdown from './coutdown';
 
 export default {
   name: 'Sidebar',
@@ -74,7 +75,8 @@ export default {
     Skip,
     Revive,
     FiftyFifty,
-    Timer
+    Timer,
+    Countdown
   },
   computed: {
     ...mapGetters({
