@@ -12,7 +12,7 @@
             :id="answerItem.answer"
             :value="answerItem.answer"
             :name="answerItem.answer"
-            @change="handleNextQuestion"
+            @change="handleNextQuestion(answerItem.is_correct)"
             v-model="checkedAnswer"
           />
           <label class="task-label" :for="answerItem.answer">{{answerItem.answer}}</label>
@@ -59,9 +59,9 @@ export default {
     }
   },
   methods: {
-    handleNextQuestion() {
+    handleNextQuestion(isCorrectAnswer) {
       setTimeout(() => {
-        this.$store.dispatch('quizz/nextQuestion');
+        this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
       }, 150);
     }
   }

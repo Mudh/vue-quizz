@@ -23,6 +23,8 @@ const answerValue = state => state.answervalue;
 
 const totalTime = state => state.totalTime;
 
+const updatedPoints = state => state.updatedPoints;
+
 export default {
   isQuizzStart,
   stepNumber,
@@ -31,5 +33,6 @@ export default {
   question,
   answers,
   answerValue,
-  totalTime
+  totalTime,
+  updatedPoints
 };

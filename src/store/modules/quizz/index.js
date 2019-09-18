@@ -9,7 +9,9 @@ const state = {
   questionNumber: 0,
   answerValue: '',
   answerCoeff: null,
-  totalTime: 105
+  totalTime: 105,
+  currentPoints: 0,
+  updatedPoints: 0,
 };
 
 export default {

@@ -7,8 +7,9 @@ const startQuizz = ({ commit, dispatch }, level) => {
   dispatch('fetchQuestions', level);
 };
 
-const nextQuestion = ({ commit }) => {
-  commit('nextQuestion');
+const nextQuestion = ({ commit, state, rootState }, isCorrectAnswer) => {
+  commit('nextQuestion', isCorrectAnswer);
+  state.updatedPoints = rootState.auth.user.nb_points + rootState.quizz.currentPoints;
 };
 
 const updateAnswerValue = ({ commit }, payload) => {

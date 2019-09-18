@@ -14,7 +14,7 @@
           <li class="sidebar__items">
             <Score />
             <span class="item">
-              {{user.nb_points}}
+              {{updatedPoints}}
               <span>Points</span>
             </span>
           </li>
@@ -83,7 +83,8 @@ export default {
   computed: {
     ...mapGetters({
       user: 'auth/user',
-      isQuizzStart: 'quizz/isQuizzStart'
+      isQuizzStart: 'quizz/isQuizzStart',
+      updatedPoints: 'quizz/updatedPoints'
     })
   }
 };
