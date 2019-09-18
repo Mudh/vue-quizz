@@ -2,9 +2,9 @@ import axios from 'axios';
 
 // QUIZZ HANDLERS //////////////////////////////////////
 
-const startQuizz = ({ commit, dispatch }) => {
+const startQuizz = ({ commit, dispatch }, level) => {
   commit('startQuizz');
-  dispatch('fetchQuestions');
+  dispatch('fetchQuestions', level);
 };
 
 const nextQuestion = ({ commit }) => {
@@ -17,7 +17,7 @@ const updateAnswerValue = ({ commit }, payload) => {
 
 // FETCH QUESTIONS //////////////////////////////////////
 
-const fetchQuestions = ({ rootState, state }) => {
+const fetchQuestions = ({ rootState, state, dispatch }, level) => {
   if (!rootState.auth.idToken) {
     return;
   }
@@ -25,7 +25,20 @@ const fetchQuestions = ({ rootState, state }) => {
     .get(`/questionsList.json?auth=${rootState.auth.idToken}`)
     .then((res) => {
       state.quizzQuestions = res.data;
-      console.log('created', res.data);
+      dispatch('fetchLevel', level);
+      console.log('questions', res.data);
+    })
+    .catch(error => console.log(error));
+};
+
+const fetchLevel = ({ rootState, state }, level) => {
+  if (!rootState.auth.idToken) {
+    return;
+  }
+  axios
+    .get(`/level.json?auth=${rootState.auth.idToken}`)
+    .then((res) => {
+      state.answerCoeff = res.data.find(el => el.alias === level).coeff;
     })
     .catch(error => console.log(error));
 };
@@ -34,5 +47,6 @@ export default {
   startQuizz,
   nextQuestion,
   updateAnswerValue,
-  fetchQuestions
+  fetchQuestions,
+  fetchLevel
 };

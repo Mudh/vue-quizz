@@ -8,6 +8,7 @@ const state = {
   stepNumber: 1,
   questionNumber: 0,
   answerValue: '',
+  answerCoeff: null,
   totalTime: 105
 };
 

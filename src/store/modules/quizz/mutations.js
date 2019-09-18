@@ -1,5 +1,6 @@
-const startQuizz = (state) => {
+const startQuizz = (state, level) => {
   state.isQuizzStart = true;
+  state.level = level;
 };
 
 const nextQuestion = (state) => {

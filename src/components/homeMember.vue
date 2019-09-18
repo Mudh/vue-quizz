@@ -6,9 +6,9 @@
       The difficulty stands in the remaining time,
       <br />choose it wisely!!
     </p>
-    <button @click="startQuizz">Slow</button>
-    <button @click="startQuizz">Medium</button>
-    <button @click="startQuizz">Fast</button>
+    <button @click="startQuizz('slow')">Slow</button>
+    <button @click="startQuizz('medium')">Medium</button>
+    <button @click="startQuizz('fast')">Fast</button>
   </div>
 </template>
 
@@ -26,8 +26,8 @@ export default {
     })
   },
   methods: {
-    startQuizz() {
-      this.$store.dispatch('quizz/startQuizz');
+    startQuizz(level) {
+      this.$store.dispatch('quizz/startQuizz', level);
     }
   }
 };
