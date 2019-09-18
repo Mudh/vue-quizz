@@ -18,7 +18,8 @@ module.exports = {
       ts: 'never',
       tsx: 'never',
       vue: 'never'
-    }]
+    }],
+    'max-len':["error", { "code": 150 }]
   },
   parserOptions: {
     parser: 'babel-eslint',
