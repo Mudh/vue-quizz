@@ -52,7 +52,7 @@
       </div>
       <div class="sidebar__bottom">
         <div class="sidebar__countdown">
-          <Countdown :date="TotalTime" v-if="isQuizzStart" />
+          <Countdown v-if="isQuizzStart" />
         </div>
       </div>
     </div>
@@ -79,11 +79,6 @@ export default {
     FiftyFifty,
     Timer,
     Countdown
-  },
-  data() {
-    return {
-      TotalTime: new Date(new Date().getTime() + 11000).toString()
-    };
   },
   computed: {
     ...mapGetters({

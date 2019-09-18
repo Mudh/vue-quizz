@@ -21,6 +21,7 @@ const answers = (state) => {
 };
 const answerValue = state => state.answervalue;
 
+const totalTime = state => state.totalTime;
 
 export default {
   isQuizzStart,
@@ -29,5 +30,6 @@ export default {
   questionsLengthByStep,
   question,
   answers,
-  answerValue
+  answerValue,
+  totalTime
 };
