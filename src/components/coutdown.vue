@@ -5,7 +5,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import twoDigits from '../utils/tools';
 
 export default {
   name: 'Coutdown',
@@ -38,12 +37,12 @@ export default {
       this.timer = null;
       this.resetButton = false;
     },
-    padTime: time => {
+    padTime(time) {
       return (time < 10 ? '0' : '') + time;
     },
     countdown() {
       if (this.totalTime >= 1) {
-        this.totalTime--;
+        this.totalTime -= 1;
       } else {
         this.totalTime = 0;
         this.resetTimer();
