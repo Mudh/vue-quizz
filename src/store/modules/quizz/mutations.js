@@ -13,16 +13,30 @@ const nextQuestion = (state, playerAnswer) => {
     : answer[0].answer.toLowerCase() === playerAnswer.toLowerCase();
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
+  const stopQuizz = () => {
+    state.isQuizzStart = false;
+    state.stepNumber = 1;
+    state.questionNumber = 0;
+  };
+
   switch (state.questionNumber) {
     case 4:
-      state.stepNumber += 1;
-      state.questionNumber = 0;
-      state.currentPoints += togglePoints;
+      if (togglePoints === 0) {
+        stopQuizz();
+      } else {
+        state.stepNumber += 1;
+        state.questionNumber = 0;
+        state.currentPoints += togglePoints;
+      }
       break;
 
     default:
-      state.questionNumber += 1;
-      state.currentPoints += togglePoints;
+      if (togglePoints === 0) {
+        stopQuizz();
+      } else {
+        state.questionNumber += 1;
+        state.currentPoints += togglePoints;
+      }
   }
 };
 
