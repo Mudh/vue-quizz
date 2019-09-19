@@ -17,6 +17,7 @@ const nextQuestion = (state, playerAnswer) => {
     state.isQuizzStart = false;
     state.stepNumber = 1;
     state.questionNumber = 0;
+    state.totalTime = null;
   };
 
   switch (state.questionNumber) {

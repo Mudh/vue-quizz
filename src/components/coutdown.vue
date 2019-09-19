@@ -23,6 +23,9 @@ export default {
       }
     );
   },
+  destroyed() {
+    this.resetTimer();
+  },
   computed: {
     minutes() {
       const minutes = Math.floor(this.totalTime / 60);
@@ -40,10 +43,6 @@ export default {
   methods: {
     startTimer() {
       this.timer = setInterval(() => this.countdown(), 1000);
-    },
-    stopTimer() {
-      clearInterval(this.timer);
-      this.timer = null;
     },
     resetTimer() {
       clearInterval(this.timer);
