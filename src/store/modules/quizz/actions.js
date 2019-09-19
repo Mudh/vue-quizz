@@ -8,7 +8,12 @@ const startQuizz = ({ commit, dispatch }, level) => {
 };
 
 const nextQuestion = ({ commit, state, rootState }, isCorrectAnswer) => {
-  commit('nextQuestion', isCorrectAnswer);
+  // Check answer type (step 1/2 boolean, step 3 string) to commit differents mutations
+  if (typeof isCorrectAnswer === 'boolean') {
+    commit('nextQuestion', isCorrectAnswer);
+  } else {
+    commit('nextQuestion', rootState.quizz.answerValue);
+  }
   state.updatedPoints = rootState.auth.user.nb_points + rootState.quizz.currentPoints;
 };
 
@@ -39,6 +44,7 @@ const fetchLevel = ({ rootState, state }, level) => {
   axios
     .get(`/level.json?auth=${rootState.auth.idToken}`)
     .then((res) => {
+      // From the chosen level set coefficient answer and countdown duration
       state.answerCoeff = res.data.find(el => el.alias === level).coeff;
       state.totalTime = res.data.find(el => el.alias === level).duration;
     })

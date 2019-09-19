@@ -3,8 +3,14 @@ const startQuizz = (state, level) => {
   state.level = level;
 };
 
-const nextQuestion = (state, isCorrectAnswer) => {
-  const { points } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
+const nextQuestion = (state, playerAnswer) => {
+  const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
+
+  // Switch answer from steps 1/2 (input radio) and step 3 (input text)
+  // and compare string answers on the last step
+  const isCorrectAnswer = typeof playerAnswer === 'boolean'
+    ? playerAnswer
+    : answer[0].answer.toLowerCase() === playerAnswer.toLowerCase();
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
   switch (state.questionNumber) {
