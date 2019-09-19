@@ -31,7 +31,6 @@ export default {
         email: this.email,
         password: this.password
       };
-      console.log('signin data', formData);
       this.$store.dispatch('auth/login', {
         email: formData.email,
         password: formData.password
