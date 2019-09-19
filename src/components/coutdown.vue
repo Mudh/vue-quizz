@@ -1,10 +1,10 @@
 <template>
-  <span>{{minutes}}:{{seconds}}</span>
+  <span v-if="totalTime > 0">{{minutes}}:{{seconds}}</span>
 </template>
 
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Coutdown',
@@ -16,11 +16,27 @@ export default {
     };
   },
   mounted() {
-    if (this.isQuizzStart) {
-      this.totalTime = this.totalTimeState;
-      this.startTimer();
-      console.log('mounted');
-    }
+    this.$store.watch(
+      (state, getters) => getters['quizz/totalTime'],
+      (newValue, oldValue) => {
+        this.totalTime = newValue;
+        this.startTimer();
+      }
+    );
+  },
+  computed: {
+    minutes() {
+      const minutes = Math.floor(this.totalTime / 60);
+      return this.padTime(minutes);
+    },
+    seconds() {
+      const seconds = this.totalTime - this.minutes * 60;
+      return this.padTime(seconds);
+    },
+    ...mapState(['quizz/totalTime']),
+    ...mapGetters({
+      isQuizzStart: ['quizz/isQuizzStart']
+    })
   },
   methods: {
     startTimer() {
@@ -48,20 +64,6 @@ export default {
         this.resetTimer();
       }
     }
-  },
-  computed: {
-    minutes() {
-      const minutes = Math.floor(this.totalTime / 60);
-      return this.padTime(minutes);
-    },
-    seconds() {
-      const seconds = this.totalTime - this.minutes * 60;
-      return this.padTime(seconds);
-    },
-    ...mapGetters({
-      isQuizzStart: ['quizz/isQuizzStart'],
-      totalTimeState: ['quizz/totalTime']
-    })
   }
 };
 </script>

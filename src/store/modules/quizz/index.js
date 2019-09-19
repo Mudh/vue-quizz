@@ -9,7 +9,7 @@ const state = {
   questionNumber: 0,
   answerValue: '',
   answerCoeff: null,
-  totalTime: 105,
+  totalTime: null,
   currentPoints: 0,
   updatedPoints: 0,
 };

@@ -40,6 +40,7 @@ const fetchLevel = ({ rootState, state }, level) => {
     .get(`/level.json?auth=${rootState.auth.idToken}`)
     .then((res) => {
       state.answerCoeff = res.data.find(el => el.alias === level).coeff;
+      state.totalTime = res.data.find(el => el.alias === level).duration;
     })
     .catch(error => console.log(error));
 };
