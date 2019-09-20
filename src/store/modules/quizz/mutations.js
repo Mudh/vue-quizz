@@ -5,6 +5,24 @@ const startQuizz = (state, level) => {
   state.level = level;
 };
 
+const stopQuizz = (state) => {
+  state.isQuizzStart = false;
+  state.stepNumber = 1;
+  state.questionNumber = 0;
+  state.totalTime = null;
+};
+
+const incrementQuestion = (state, points) => {
+  if (state.questionNumber === 4) {
+    state.stepNumber += 1;
+    state.questionNumber = 0;
+    state.currentPoints += points;
+  } else {
+    state.questionNumber += 1;
+    state.currentPoints += points;
+  }
+};
+
 const nextQuestion = (state, playerAnswer) => {
   const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
 
@@ -15,31 +33,10 @@ const nextQuestion = (state, playerAnswer) => {
     : answer[0].answer.toLowerCase() === playerAnswer.toLowerCase();
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
-  const stopQuizz = () => {
-    state.isQuizzStart = false;
-    state.stepNumber = 1;
-    state.questionNumber = 0;
-    state.totalTime = null;
-  };
-
-  switch (state.questionNumber) {
-    case 4:
-      if (togglePoints === 0) {
-        stopQuizz();
-      } else {
-        state.stepNumber += 1;
-        state.questionNumber = 0;
-        state.currentPoints += togglePoints;
-      }
-      break;
-
-    default:
-      if (togglePoints === 0) {
-        stopQuizz();
-      } else {
-        state.questionNumber += 1;
-        state.currentPoints += togglePoints;
-      }
+  if (togglePoints === 0) {
+    stopQuizz(state);
+  } else {
+    incrementQuestion(state, togglePoints);
   }
 };
 
@@ -50,18 +47,10 @@ const updateAnswerValue = (state, payload) => {
 
 // JOKERS MUTATIONS //////////////////////////////////////////
 
-const skipQuestion = (state) => {
-  if (state.questionNumber === 4) {
-    state.stepNumber += 1;
-    state.questionNumber = 0;
-  } else {
-    state.questionNumber += 1;
-  }
-};
 
 export default {
   startQuizz,
   nextQuestion,
   updateAnswerValue,
-  skipQuestion,
+  incrementQuestion
 };

@@ -24,7 +24,7 @@ const updateAnswerValue = ({ commit }, payload) => {
 // JOKERS HANDLERS //////////////////////////////////////
 
 const skipQuestion = ({ commit }) => {
-  commit('skipQuestion');
+  commit('incrementQuestion', 0);
 };
 
 // FETCH QUESTIONS //////////////////////////////////////
