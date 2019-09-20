@@ -20,10 +20,10 @@ const answers = (state) => {
   return state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber].answer;
 };
 const answerValue = state => state.answervalue;
-
 const totalTime = state => state.totalTime;
-
+const currentPoints = state => state.currentPoints;
 const updatedPoints = state => state.updatedPoints;
+const radioKey = state => state.radioKey;
 
 export default {
   isQuizzStart,
@@ -34,5 +34,7 @@ export default {
   answers,
   answerValue,
   totalTime,
-  updatedPoints
+  currentPoints,
+  updatedPoints,
+  radioKey
 };

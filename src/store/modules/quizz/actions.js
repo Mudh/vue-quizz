@@ -33,6 +33,10 @@ const skipQuestion = ({ commit }) => {
   commit('incrementQuestion', 0);
 };
 
+const reviveQuizz = ({ commit }) => {
+  commit('reviveQuizz');
+};
+
 // FETCH QUESTIONS //////////////////////////////////////
 
 const fetchQuestions = ({ rootState, state, dispatch }, level) => {
@@ -69,6 +73,7 @@ export default {
   updateAnswerValue,
   fetchQuestions,
   fetchLevel,
+  stopQuizz,
   skipQuestion,
-  stopQuizz
+  reviveQuizz
 };

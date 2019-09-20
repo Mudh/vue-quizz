@@ -11,7 +11,10 @@ const state = {
   answerCoeff: null,
   totalTime: null,
   currentPoints: 0,
+  stepPoints: 0,
   updatedPoints: 0,
+  isReviveActive: false,
+  radioKey: 0,
 };
 
 export default {

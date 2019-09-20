@@ -14,6 +14,7 @@
             :id="answerItem.answer"
             :value="answerItem.answer"
             :name="answerItem.answer"
+            :key="radioKey"
             @change="handleNextQuestion(answerItem.is_correct)"
             v-model="checkedAnswer"
           />
@@ -33,7 +34,7 @@
       <button class="joker" @click="skipQuestion">
         <Skip />
       </button>
-      <button class="joker" onClick="{this.handleRevivejoker}">
+      <button class="joker" @click="reviveQuizz">
         <Revive />
       </button>
       <button class="stop" btnText="STOP" @click="stopQuizz">STOP</button>
@@ -74,7 +75,8 @@ export default {
       questionsLengthByStep: 'quizz/questionsLengthByStep',
       question: 'quizz/question',
       answers: 'quizz/answers',
-      answerValue: 'quizz/answerValue'
+      answerValue: 'quizz/answerValue',
+      radioKey: 'quizz/radioKey'
     }),
     answerValue: {
       get() {
@@ -87,19 +89,21 @@ export default {
   },
   methods: {
     handleNextQuestion(isCorrectAnswer) {
+      // The time out helps the user to notice the checked answer
+      // in order to improve ux/ui experience
       setTimeout(() => {
         this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
       }, 150);
     },
     ...mapActions({
       stopQuizz: 'quizz/stopQuizz',
-      skipQuestion: 'quizz/skipQuestion'
+      skipQuestion: 'quizz/skipQuestion',
+      reviveQuizz: 'quizz/reviveQuizz'
     })
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../styles/variables.scss';
 @import '../styles/quizz.scss';

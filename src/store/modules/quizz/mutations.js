@@ -5,12 +5,29 @@ const startQuizz = (state, level) => {
   state.level = level;
 };
 
+// Joker revive restart quizz from the last current step
+// on a wrong answer
+const reviveQuizz = (state) => {
+  state.isReviveActive = true;
+};
+
 const stopQuizz = (state, resetPoints) => {
-  state.isQuizzStart = false;
-  state.stepNumber = 1;
-  state.questionNumber = 0;
-  state.totalTime = null;
-  state.updatedPoints = resetPoints;
+  if (state.isReviveActive) {
+    state.currentPoints = state.stepPoints;
+    state.questionNumber = 0;
+    state.isReviveActive = false;
+    // When you answer incorrectly at the first question of one of the 3 steps
+    // the radio input stays checked if you use revive joker
+    // The random key enable component re rendering and unchecked it
+    // https://michaelnthiessen.com/force-re-render/
+    state.radioKey = Math.random().toString(36).replace('0.', '');
+  } else {
+    state.isQuizzStart = false;
+    state.stepNumber = 1;
+    state.questionNumber = 0;
+    state.totalTime = null;
+    state.updatedPoints = resetPoints;
+  }
 };
 
 const incrementQuestion = (state, points) => {
@@ -18,6 +35,7 @@ const incrementQuestion = (state, points) => {
     state.stepNumber += 1;
     state.questionNumber = 0;
     state.currentPoints += points;
+    state.stepPoints = state.currentPoints;
   } else {
     state.questionNumber += 1;
     state.currentPoints += points;
@@ -42,15 +60,18 @@ const nextQuestion = (state, { playerAnswer, userPoints }) => {
   }
 };
 
+
 // Step 3 answer input
 const updateAnswerValue = (state, payload) => {
   state.answerValue = payload;
 };
+
 
 export default {
   startQuizz,
   nextQuestion,
   updateAnswerValue,
   stopQuizz,
-  incrementQuestion
+  incrementQuestion,
+  reviveQuizz
 };
