@@ -21,6 +21,12 @@ const updateAnswerValue = ({ commit }, payload) => {
   commit('updateAnswerValue', payload);
 };
 
+// JOKERS HANDLERS //////////////////////////////////////
+
+const skipQuestion = ({ commit }) => {
+  commit('skipQuestion');
+};
+
 // FETCH QUESTIONS //////////////////////////////////////
 
 const fetchQuestions = ({ rootState, state, dispatch }, level) => {
@@ -56,5 +62,6 @@ export default {
   nextQuestion,
   updateAnswerValue,
   fetchQuestions,
-  fetchLevel
+  fetchLevel,
+  skipQuestion
 };

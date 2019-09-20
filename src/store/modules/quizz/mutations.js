@@ -1,3 +1,5 @@
+// QUIZZ MUTATIONS //////////////////////////////////////////
+
 const startQuizz = (state, level) => {
   state.isQuizzStart = true;
   state.level = level;
@@ -41,12 +43,25 @@ const nextQuestion = (state, playerAnswer) => {
   }
 };
 
+// Step 3 answer input
 const updateAnswerValue = (state, payload) => {
   state.answerValue = payload;
+};
+
+// JOKERS MUTATIONS //////////////////////////////////////////
+
+const skipQuestion = (state) => {
+  if (state.questionNumber === 4) {
+    state.stepNumber += 1;
+    state.questionNumber = 0;
+  } else {
+    state.questionNumber += 1;
+  }
 };
 
 export default {
   startQuizz,
   nextQuestion,
   updateAnswerValue,
+  skipQuestion,
 };

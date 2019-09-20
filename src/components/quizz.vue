@@ -30,7 +30,7 @@
       </fieldset>
     </form>
     <footer class="quizz__footer">
-      <button class="joker" onClick="{this.handleSkipJoker}">
+      <button class="joker" @click="skipQuestion">
         <Skip />
       </button>
       <button class="joker" onClick="{this.handleRevivejoker}">
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Skip from './icons/skip';
 import Revive from './icons/revive';
 import FiftyFifty from './icons/fiftyFifty';
@@ -90,7 +90,10 @@ export default {
       setTimeout(() => {
         this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
       }, 150);
-    }
+    },
+    ...mapActions({
+      skipQuestion: 'quizz/skipQuestion'
+    })
   }
 };
 </script>
