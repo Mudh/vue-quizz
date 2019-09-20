@@ -14,7 +14,7 @@
           <li class="sidebar__items">
             <Score />
             <span class="item">
-              {{updatedPoints}}
+              {{points}}
               <span>Points</span>
             </span>
           </li>
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import Credits from './icons/credits';
 import Score from './icons/score';
 import Skip from './icons/skip';
@@ -71,6 +71,11 @@ import Countdown from './coutdown';
 
 export default {
   name: 'Sidebar',
+  data() {
+    return {
+      points: 0
+    };
+  },
   components: {
     Credits,
     Score,
@@ -80,12 +85,22 @@ export default {
     Timer,
     Countdown
   },
+  mounted() {
+    this.points = this.updatedPoints;
+    this.$store.watch(
+      (state, getters) => getters['quizz/currentPoints'],
+      (newValue, oldValue) => {
+        this.points = newValue;
+      }
+    );
+  },
   computed: {
     ...mapGetters({
       user: 'auth/user',
       isQuizzStart: 'quizz/isQuizzStart',
       updatedPoints: 'quizz/updatedPoints'
-    })
+    }),
+    ...mapState(['quizz/currentPoints'])
   }
 };
 </script>
