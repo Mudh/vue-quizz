@@ -1,9 +1,11 @@
 <template>
   <div class="quizz">
-    <h2 class="quizz__question">{{question}}</h2>
-    <span
-      class="quizz__breadcrumb"
-    >Step {{step}} - Question {{questionNumber}} / {{questionsLengthByStep}}</span>
+    <header>
+      <h2 class="quizz__question">{{question}}</h2>
+      <span
+        class="quizz__breadcrumb"
+      >Step {{step}} - Question {{questionNumber}} / {{questionsLengthByStep}}</span>
+    </header>
     <form @submit.prevent="handleNextQuestion">
       <ul class="quizz__answerList" v-if="step < 3">
         <li :key="answerItem.id" v-for="answerItem in answers" class="quizz__answerItem">
@@ -27,17 +29,42 @@
         />
       </fieldset>
     </form>
+    <footer class="quizz__footer">
+      <button class="joker" onClick="{this.handleSkipJoker}">
+        <Skip />
+      </button>
+      <button class="joker" onClick="{this.handleRevivejoker}">
+        <Revive />
+      </button>
+      <button class="stop" btnText="STOP" onClick="{setQuizStop}">STOP</button>
+      <button class="joker" onClick="{this.handleFiftyFiftyjoker}">
+        <FiftyFifty />
+      </button>
+      <button class="joker" onClick="{this.handleTimerJoker}">
+        <Timer />
+      </button>
+    </footer>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import Skip from './icons/skip';
+import Revive from './icons/revive';
+import FiftyFifty from './icons/fiftyFifty';
+import Timer from './icons/timer';
 
 export default {
   data() {
     return {
       checkedAnswer: false
     };
+  },
+  components: {
+    Skip,
+    Revive,
+    FiftyFifty,
+    Timer
   },
   name: 'Quizz',
   computed: {
