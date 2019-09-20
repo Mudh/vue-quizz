@@ -36,7 +36,7 @@
       <button class="joker" onClick="{this.handleRevivejoker}">
         <Revive />
       </button>
-      <button class="stop" btnText="STOP" onClick="{setQuizStop}">STOP</button>
+      <button class="stop" btnText="STOP" @click="stopQuizz">STOP</button>
       <button class="joker" onClick="{this.handleFiftyFiftyjoker}">
         <FiftyFifty />
       </button>
@@ -92,6 +92,7 @@ export default {
       }, 150);
     },
     ...mapActions({
+      stopQuizz: 'quizz/stopQuizz',
       skipQuestion: 'quizz/skipQuestion'
     })
   }

@@ -7,14 +7,20 @@ const startQuizz = ({ commit, dispatch }, level) => {
   dispatch('fetchQuestions', level);
 };
 
-const nextQuestion = ({ commit, state, rootState }, isCorrectAnswer) => {
+const stopQuizz = ({ commit, rootState }) => {
+  commit('stopQuizz', rootState.auth.user.nb_points);
+};
+
+const nextQuestion = ({ commit, rootState }, playerAnswer) => {
+  const quizzAnwerValue = rootState.quizz.answerValue;
+  const userPoints = rootState.auth.user.nb_points;
+
   // Check answer type (step 1/2 boolean, step 3 string) to commit differents mutations
-  if (typeof isCorrectAnswer === 'boolean') {
-    commit('nextQuestion', isCorrectAnswer);
+  if (typeof playerAnswer === 'boolean') {
+    commit('nextQuestion', { playerAnswer, userPoints });
   } else {
-    commit('nextQuestion', rootState.quizz.answerValue);
+    commit('nextQuestion', { quizzAnwerValue, userPoints });
   }
-  state.updatedPoints = rootState.auth.user.nb_points + rootState.quizz.currentPoints;
 };
 
 const updateAnswerValue = ({ commit }, payload) => {
@@ -63,5 +69,6 @@ export default {
   updateAnswerValue,
   fetchQuestions,
   fetchLevel,
-  skipQuestion
+  skipQuestion,
+  stopQuizz
 };

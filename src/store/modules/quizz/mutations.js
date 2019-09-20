@@ -5,11 +5,12 @@ const startQuizz = (state, level) => {
   state.level = level;
 };
 
-const stopQuizz = (state) => {
+const stopQuizz = (state, resetPoints) => {
   state.isQuizzStart = false;
   state.stepNumber = 1;
   state.questionNumber = 0;
   state.totalTime = null;
+  state.updatedPoints = resetPoints;
 };
 
 const incrementQuestion = (state, points) => {
@@ -23,7 +24,7 @@ const incrementQuestion = (state, points) => {
   }
 };
 
-const nextQuestion = (state, playerAnswer) => {
+const nextQuestion = (state, { playerAnswer, userPoints }) => {
   const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
 
   // Switch answer from steps 1/2 (input radio) and step 3 (input text)
@@ -34,9 +35,10 @@ const nextQuestion = (state, playerAnswer) => {
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
   if (togglePoints === 0) {
-    stopQuizz(state);
+    stopQuizz(state, userPoints);
   } else {
     incrementQuestion(state, togglePoints);
+    state.updatedPoints = userPoints + state.currentPoints;
   }
 };
 
@@ -45,12 +47,10 @@ const updateAnswerValue = (state, payload) => {
   state.answerValue = payload;
 };
 
-// JOKERS MUTATIONS //////////////////////////////////////////
-
-
 export default {
   startQuizz,
   nextQuestion,
   updateAnswerValue,
+  stopQuizz,
   incrementQuestion
 };
