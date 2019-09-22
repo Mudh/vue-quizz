@@ -36,6 +36,7 @@ const incrementQuestion = (state, points) => {
     state.questionNumber = 0;
     state.currentPoints += points;
     state.stepPoints = state.currentPoints;
+    state.disabledJoker.fiftyFifty = !(state.stepNumber === 2);
   } else {
     state.questionNumber += 1;
     state.currentPoints += points;
@@ -62,10 +63,14 @@ const nextQuestion = (state, { playerAnswer, userPoints }) => {
 
 
 // Step 3 answer input
-const updateAnswerValue = (state, payload) => {
-  state.answerValue = payload;
+const updateAnswerValue = (state, value) => {
+  state.answerValue = value;
 };
 
+// Global mutation for all jokers buttons
+const disableJoker = (state, jokerName) => {
+  state.disabledJoker[jokerName] = true;
+};
 
 export default {
   startQuizz,
@@ -73,5 +78,6 @@ export default {
   updateAnswerValue,
   stopQuizz,
   incrementQuestion,
-  reviveQuizz
+  reviveQuizz,
+  disableJoker
 };

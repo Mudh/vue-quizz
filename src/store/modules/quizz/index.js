@@ -15,6 +15,12 @@ const state = {
   updatedPoints: 0,
   isReviveActive: false,
   radioKey: 0,
+  disabledJoker: {
+    skip: false,
+    revive: false,
+    fiftyFifty: true,
+    extraTime: false
+  }
 };
 
 export default {

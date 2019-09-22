@@ -31,17 +31,17 @@
       </fieldset>
     </form>
     <footer class="quizz__footer">
-      <button class="joker" @click="skipQuestion">
+      <button class="joker" :disabled="isSkipDisabled" @click="skipQuestion">
         <Skip />
       </button>
-      <button class="joker" @click="reviveQuizz">
+      <button class="joker" :disabled="isReviveDisabled" @click="reviveQuizz">
         <Revive />
       </button>
       <button class="stop" btnText="STOP" @click="stopQuizz">STOP</button>
-      <button class="joker" onClick="{this.handleFiftyFiftyjoker}">
+      <button class="joker" :disabled="isFiftyfiftyDisabled" @click="fiftyFifty">
         <FiftyFifty />
       </button>
-      <button class="joker" onClick="{this.handleTimerJoker}">
+      <button class="joker" :disabled="isTimerDisabled" @click="addExtraTime">
         <Timer />
       </button>
     </footer>
@@ -58,7 +58,8 @@ import Timer from './icons/timer';
 export default {
   data() {
     return {
-      checkedAnswer: false
+      checkedAnswer: false,
+      disabled: true
     };
   },
   components: {
@@ -76,7 +77,11 @@ export default {
       question: 'quizz/question',
       answers: 'quizz/answers',
       answerValue: 'quizz/answerValue',
-      radioKey: 'quizz/radioKey'
+      radioKey: 'quizz/radioKey',
+      isSkipDisabled: 'quizz/isSkipDisabled',
+      isReviveDisabled: 'quizz/isReviveDisabled',
+      isFiftyfiftyDisabled: 'quizz/isFiftyfiftyDisabled',
+      isTimerDisabled: 'quizz/isTimerDisabled'
     }),
     answerValue: {
       get() {
@@ -94,11 +99,14 @@ export default {
       setTimeout(() => {
         this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
       }, 150);
+      console.log(this.isSkipDisabled);
     },
     ...mapActions({
       stopQuizz: 'quizz/stopQuizz',
       skipQuestion: 'quizz/skipQuestion',
-      reviveQuizz: 'quizz/reviveQuizz'
+      reviveQuizz: 'quizz/reviveQuizz',
+      fiftyFifty: 'quizz/fiftyFifty',
+      addExtraTime: 'quizz/addExtraTime'
     })
   }
 };

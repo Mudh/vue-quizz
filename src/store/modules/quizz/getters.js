@@ -24,6 +24,10 @@ const totalTime = state => state.totalTime;
 const currentPoints = state => state.currentPoints;
 const updatedPoints = state => state.updatedPoints;
 const radioKey = state => state.radioKey;
+const isSkipDisabled = state => state.disabledJoker.skip;
+const isReviveDisabled = state => state.disabledJoker.revive;
+const isFiftyfiftyDisabled = state => state.disabledJoker.fiftyFifty;
+const isTimerDisabled = state => state.disabledJoker.extraTime;
 
 export default {
   isQuizzStart,
@@ -36,5 +40,9 @@ export default {
   totalTime,
   currentPoints,
   updatedPoints,
-  radioKey
+  radioKey,
+  isSkipDisabled,
+  isReviveDisabled,
+  isFiftyfiftyDisabled,
+  isTimerDisabled,
 };

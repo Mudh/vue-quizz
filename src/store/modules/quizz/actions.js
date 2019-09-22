@@ -31,10 +31,20 @@ const updateAnswerValue = ({ commit }, payload) => {
 
 const skipQuestion = ({ commit }) => {
   commit('incrementQuestion', 0);
+  commit('disableJoker', 'skip');
 };
 
 const reviveQuizz = ({ commit }) => {
   commit('reviveQuizz');
+  commit('disableJoker', 'revive');
+};
+
+const fiftyFifty = ({ commit }) => {
+  commit('disableJoker', 'fiftyFifty');
+};
+
+const addExtraTime = ({ commit }) => {
+  commit('disableJoker', 'extraTime');
 };
 
 // FETCH QUESTIONS //////////////////////////////////////
@@ -75,5 +85,7 @@ export default {
   fetchLevel,
   stopQuizz,
   skipQuestion,
-  reviveQuizz
+  reviveQuizz,
+  fiftyFifty,
+  addExtraTime
 };
