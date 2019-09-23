@@ -34,7 +34,7 @@
       <button class="joker" :disabled="isSkipDisabled" @click="skipQuestion">
         <Skip />
       </button>
-      <button class="joker" :disabled="isReviveDisabled" @click="reviveQuizz">
+      <button class="joker" :disabled="isReviveDisabled" @click="addExtraRun">
         <Revive />
       </button>
       <button class="stop" btnText="STOP" @click="stopQuizz">STOP</button>
@@ -104,7 +104,7 @@ export default {
     ...mapActions({
       stopQuizz: 'quizz/stopQuizz',
       skipQuestion: 'quizz/skipQuestion',
-      reviveQuizz: 'quizz/reviveQuizz',
+      addExtraRun: 'quizz/addExtraRun',
       fiftyFifty: 'quizz/fiftyFifty',
       addExtraTime: 'quizz/addExtraTime'
     })

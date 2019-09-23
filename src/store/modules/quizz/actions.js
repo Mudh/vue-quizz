@@ -34,7 +34,7 @@ const skipQuestion = ({ commit }) => {
   commit('disableJoker', 'skip');
 };
 
-const reviveQuizz = ({ commit }) => {
+const addExtraRun = ({ commit }) => {
   commit('reviveQuizz');
   commit('disableJoker', 'revive');
 };
@@ -85,7 +85,7 @@ export default {
   fetchLevel,
   stopQuizz,
   skipQuestion,
-  reviveQuizz,
+  addExtraRun,
   fiftyFifty,
   addExtraTime
 };
