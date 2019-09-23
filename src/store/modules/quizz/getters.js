@@ -17,7 +17,10 @@ const answers = (state) => {
   if (!state.quizzQuestions[`step${state.stepNumber}`]) {
     return false;
   }
-  return state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber].answer;
+  const filteredAnswers = state.filteredAnswers.length !== 0
+    ? state.filteredAnswers
+    : state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber].answer;
+  return filteredAnswers;
 };
 const answerValue = state => state.answervalue;
 const totalTime = state => state.totalTime;

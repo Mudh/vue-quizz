@@ -5,6 +5,7 @@ import mutations from './mutations';
 const state = {
   isQuizzStart: false,
   quizzQuestions: [],
+  filteredAnswers: [],
   stepNumber: 1,
   questionNumber: 0,
   answerValue: '',

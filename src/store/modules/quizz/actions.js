@@ -41,6 +41,7 @@ const addExtraRun = ({ commit }) => {
 
 const fiftyFifty = ({ commit }) => {
   commit('disableJoker', 'fiftyFifty');
+  commit('fiftyFifty');
 };
 
 const addExtraTime = ({ commit }) => {

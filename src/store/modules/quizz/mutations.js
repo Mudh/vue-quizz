@@ -1,4 +1,6 @@
-// QUIZZ MUTATIONS //////////////////////////////////////////
+import shuffle from '../../../utils/utils';
+
+// QUIZZ AND JOKERS MUTATIONS //////////////////////////////////////////
 
 const startQuizz = (state, level) => {
   state.isQuizzStart = true;
@@ -9,6 +11,19 @@ const startQuizz = (state, level) => {
 // on a wrong answer
 const reviveQuizz = (state) => {
   state.isReviveActive = true;
+};
+
+// Remove 2 wrong answers
+const fiftyFifty = (state) => {
+  const { answer } = state.quizzQuestions.step2[state.questionNumber];
+
+  const filteredAnswers = shuffle([
+    ...answer.filter(item => item.is_correct === true),
+    answer.filter(
+      item => item.is_correct === false,
+    )[0],
+  ]);
+  state.filteredAnswers = [...filteredAnswers];
 };
 
 const stopQuizz = (state, resetPoints) => {
@@ -46,6 +61,11 @@ const incrementQuestion = (state, points) => {
 const nextQuestion = (state, { playerAnswer, userPoints }) => {
   const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
 
+  // Return on regular answers after fiftyFifty joker
+  if (state.filteredAnswers.length > 0) {
+    state.filteredAnswers = [];
+  }
+
   // Switch answer from steps 1/2 (input radio) and step 3 (input text)
   // and compare string answers on the last step
   const isCorrectAnswer = typeof playerAnswer === 'boolean'
@@ -79,5 +99,6 @@ export default {
   stopQuizz,
   incrementQuestion,
   reviveQuizz,
+  fiftyFifty,
   disableJoker
 };
