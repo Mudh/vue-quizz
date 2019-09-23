@@ -37,7 +37,7 @@
       <button class="joker" :disabled="isReviveDisabled" @click="addExtraRun">
         <Revive />
       </button>
-      <button class="stop" btnText="STOP" @click="stopQuizz">STOP</button>
+      <button class="stop" @click="stopQuizz">STOP</button>
       <button class="joker" :disabled="isFiftyfiftyDisabled" @click="fiftyFifty">
         <FiftyFifty />
       </button>
