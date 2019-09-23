@@ -99,7 +99,6 @@ export default {
       setTimeout(() => {
         this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
       }, 150);
-      console.log(this.isSkipDisabled);
     },
     ...mapActions({
       stopQuizz: 'quizz/stopQuizz',
