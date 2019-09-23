@@ -58,7 +58,7 @@ const incrementQuestion = (state, points) => {
   }
 };
 
-const nextQuestion = (state, { playerAnswer, userPoints }) => {
+const nextQuestion = (state, { playerAnswer, playerTextValue, userPoints }) => {
   const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
 
   // Return on regular answers after fiftyFifty joker
@@ -70,7 +70,7 @@ const nextQuestion = (state, { playerAnswer, userPoints }) => {
   // and compare string answers on the last step
   const isCorrectAnswer = typeof playerAnswer === 'boolean'
     ? playerAnswer
-    : answer[0].answer.toLowerCase() === playerAnswer.toLowerCase();
+    : answer[0].answer.toLowerCase() === playerTextValue.toLowerCase();
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
   if (togglePoints === 0) {

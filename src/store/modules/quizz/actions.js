@@ -12,14 +12,14 @@ const stopQuizz = ({ commit, rootState }) => {
 };
 
 const nextQuestion = ({ commit, rootState }, playerAnswer) => {
-  const quizzAnwerValue = rootState.quizz.answerValue;
+  const playerTextValue = rootState.quizz.answerValue;
   const userPoints = rootState.auth.user.nb_points;
 
   // Check answer type (step 1/2 boolean, step 3 string) to commit differents mutations
   if (typeof playerAnswer === 'boolean') {
     commit('nextQuestion', { playerAnswer, userPoints });
   } else {
-    commit('nextQuestion', { quizzAnwerValue, userPoints });
+    commit('nextQuestion', { playerTextValue, userPoints });
   }
 };
 
