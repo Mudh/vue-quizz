@@ -14,7 +14,6 @@
             :id="answerItem.answer"
             :value="answerItem.answer"
             :name="answerItem.answer"
-            :key="radioKey"
             @change="handleNextQuestion(answerItem.is_correct)"
             v-model="checkedAnswer"
           />
@@ -77,7 +76,6 @@ export default {
       question: 'quizz/question',
       answers: 'quizz/answers',
       answerValue: 'quizz/answerValue',
-      radioKey: 'quizz/radioKey',
       isSkipDisabled: 'quizz/isSkipDisabled',
       isReviveDisabled: 'quizz/isReviveDisabled',
       isFiftyfiftyDisabled: 'quizz/isFiftyfiftyDisabled',
@@ -97,6 +95,7 @@ export default {
       // The time out helps the user to notice the checked answer
       // in order to improve ux/ui experience
       setTimeout(() => {
+        this.checkedAnswer = false;
         this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
       }, 150);
     },

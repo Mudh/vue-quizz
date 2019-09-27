@@ -31,11 +31,6 @@ const stopQuizz = (state, resetPoints) => {
     state.currentPoints = state.stepPoints;
     state.questionNumber = 0;
     state.isReviveActive = false;
-    // When you answer incorrectly at the first question of one of the 3 steps
-    // the radio input stays checked if you use revive joker
-    // The random key enable component re rendering and unchecked it
-    // https://michaelnthiessen.com/force-re-render/
-    state.radioKey = Math.random().toString(36).replace('0.', '');
   } else {
     state.isQuizzStart = false;
     state.stepNumber = 1;

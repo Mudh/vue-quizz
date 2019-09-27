@@ -26,7 +26,6 @@ const answerValue = state => state.answervalue;
 const totalTime = state => state.totalTime;
 const currentPoints = state => state.currentPoints;
 const updatedPoints = state => state.updatedPoints;
-const radioKey = state => state.radioKey;
 const isSkipDisabled = state => state.disabledJoker.skip;
 const isReviveDisabled = state => state.disabledJoker.revive;
 const isFiftyfiftyDisabled = state => state.disabledJoker.fiftyFifty;
@@ -43,7 +42,6 @@ export default {
   totalTime,
   currentPoints,
   updatedPoints,
-  radioKey,
   isSkipDisabled,
   isReviveDisabled,
   isFiftyfiftyDisabled,
