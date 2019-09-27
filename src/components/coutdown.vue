@@ -27,7 +27,6 @@ export default {
   computed: {
     ...mapState(['quizz/totalTime']),
     ...mapGetters({
-      isQuizzStart: ['quizz/isQuizzStart'],
       minutes: ['quizz/minutes'],
       seconds: ['quizz/seconds']
     })
