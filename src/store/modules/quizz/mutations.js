@@ -45,7 +45,7 @@ const fiftyFifty = (state) => {
 };
 
 const addExtraTime = (state) => {
-  state.isReviveActive = true;
+  state.totalTime += 30;
 };
 
 const stopQuizz = (state, resetPoints) => {

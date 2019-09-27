@@ -44,11 +44,12 @@ const addExtraRun = ({ commit }) => {
 };
 
 const fiftyFifty = ({ commit }) => {
-  commit('disableJoker', 'fiftyFifty');
   commit('fiftyFifty');
+  commit('disableJoker', 'fiftyFifty');
 };
 
 const addExtraTime = ({ commit }) => {
+  commit('addExtraTime');
   commit('disableJoker', 'extraTime');
 };
 
