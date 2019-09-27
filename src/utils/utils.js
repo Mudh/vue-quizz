@@ -5,4 +5,6 @@ const shuffle = unshuffled => unshuffled
   .sort((a, b) => a.sort - b.sort)
   .map(a => a.value);
 
-export default shuffle;
+const padTime = time => (time < 10 ? '0' : '') + time;
+
+export { shuffle, padTime };

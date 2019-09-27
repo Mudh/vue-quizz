@@ -1,10 +1,28 @@
-import shuffle from '../../../utils/utils';
+import { shuffle } from '../../../utils/utils';
 
 // QUIZZ AND JOKERS MUTATIONS //////////////////////////////////////////
+
+const startCountdown = (state) => {
+  const countdown = setInterval(() => {
+    if (state.totalTime >= 1) {
+      state.totalTime -= 1;
+    } else {
+      state.totalTime = 0;
+      clearInterval(countdown);
+    }
+  }, 1000);
+};
+
+const resetCountdown = (state) => {
+  state.isQuizzStart = false;
+  state.totalTime = null;
+  clearInterval(startCountdown(state));
+};
 
 const startQuizz = (state, level) => {
   state.isQuizzStart = true;
   state.level = level;
+  startCountdown(state);
 };
 
 // Joker revive restart quizz from the last current step
@@ -24,6 +42,10 @@ const fiftyFifty = (state) => {
     )[0],
   ]);
   state.filteredAnswers = [...filteredAnswers];
+};
+
+const addExtraTime = (state) => {
+  state.isReviveActive = true;
 };
 
 const stopQuizz = (state, resetPoints) => {
@@ -92,8 +114,10 @@ export default {
   nextQuestion,
   updateAnswerValue,
   stopQuizz,
+  resetCountdown,
   incrementQuestion,
   reviveQuizz,
   fiftyFifty,
+  addExtraTime,
   disableJoker
 };

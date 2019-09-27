@@ -11,6 +11,10 @@ const stopQuizz = ({ commit, rootState }) => {
   commit('stopQuizz', rootState.auth.user.nb_points);
 };
 
+const resetCountdown = ({ commit }) => {
+  commit('resetCountdown');
+};
+
 const nextQuestion = ({ commit, rootState }, playerAnswer) => {
   const playerTextValue = rootState.quizz.answerValue;
   const userPoints = rootState.auth.user.nb_points;
@@ -80,11 +84,12 @@ const fetchLevel = ({ rootState, state }, level) => {
 
 export default {
   startQuizz,
+  stopQuizz,
+  resetCountdown,
   nextQuestion,
   updateAnswerValue,
   fetchQuestions,
   fetchLevel,
-  stopQuizz,
   skipQuestion,
   addExtraRun,
   fiftyFifty,
