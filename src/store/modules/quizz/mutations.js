@@ -32,7 +32,7 @@ const disableJoker = (state, jokerName) => {
 // QUIZZ MUTATIONS //////////////////////////////////////////
 
 const stopQuizz = (state, resetPoints) => {
-  if (state.isReviveActive) {
+  if (state.isReviveActive && state.totalTime >= 1) {
     state.currentPoints = state.stepPoints;
     state.questionNumber = 0;
     state.isReviveActive = false;
