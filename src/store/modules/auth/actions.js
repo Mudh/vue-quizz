@@ -101,9 +101,9 @@ const fetchUser = ({ state, dispatch }, val) => {
   axios
     .get(`/users.json?orderBy="email"&equalTo="${val}"`)
     .then((res) => {
-      const userValues = Object.values(res.data)[0];
-      const user = userValues;
-      dispatch('storeUser', user);
+      const user = Object.values(res.data)[0];
+      const userKey = Object.keys(res.data)[0];
+      dispatch('storeUser', { user, userKey });
     });
 };
 
@@ -146,6 +146,19 @@ const logout = ({ commit }) => {
   localStorage.removeItem('userId');
 };
 
+// UPDATE PLAYER DATA //////////////////////////////////////
+
+const updatePartyCount = ({ state, commit }) => {
+  commit('updatePartyCount');
+  const tokenEmail = jwtDecode(localStorage.getItem('token'));
+  console.log(tokenEmail, state.userKey);
+  axios
+    .put(`/users/${state.userKey}/nb_games.json?auth=${state.idToken}`, state.user.nb_games)
+    .then((res) => {
+      console.log(res.data);
+    });
+};
+
 export default {
   setLogoutTimer,
   signup,
@@ -155,4 +168,5 @@ export default {
   stayLogged,
   logout,
   fetchUser,
+  updatePartyCount,
 };
