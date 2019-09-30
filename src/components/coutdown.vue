@@ -8,27 +8,20 @@ import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Coutdown',
-  data() {
-    return {
-      totalTime: null
-    };
+  updated() {
+    if (this.totalTime === 0) {
+      this.$store.dispatch('quizz/stopQuizz', this.userPoints);
+    }
   },
-  mounted() {
-    this.$store.watch(
-      (state, getters) => getters['quizz/totalTime'],
-      (newValue, oldValue) => {
-        this.totalTime = newValue;
-      }
-    );
-  },
-  destroyed() {
+  beforeDestroy() {
     this.$store.dispatch('quizz/resetCountdown');
   },
   computed: {
-    ...mapState(['quizz/totalTime']),
     ...mapGetters({
       minutes: ['quizz/minutes'],
-      seconds: ['quizz/seconds']
+      seconds: ['quizz/seconds'],
+      totalTime: ['quizz/totalTime'],
+      userPoints: ['auth/userPoints']
     })
   }
 };
