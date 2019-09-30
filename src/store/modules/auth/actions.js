@@ -150,8 +150,6 @@ const logout = ({ commit }) => {
 
 const updatePartyCount = ({ state, commit }) => {
   commit('updatePartyCount');
-  const tokenEmail = jwtDecode(localStorage.getItem('token'));
-  console.log(tokenEmail, state.userKey);
   axios
     .put(`/users/${state.userKey}/nb_games.json?auth=${state.idToken}`, state.user.nb_games)
     .then((res) => {
