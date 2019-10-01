@@ -10,7 +10,7 @@ export default {
   name: 'Coutdown',
   updated() {
     if (this.totalTime === 0) {
-      this.$store.dispatch('quizz/stopQuizz', this.userPoints);
+      this.$store.dispatch('quizz/stopQuizz', this.userScore);
     }
   },
   beforeDestroy() {
@@ -21,7 +21,7 @@ export default {
       minutes: ['quizz/minutes'],
       seconds: ['quizz/seconds'],
       totalTime: ['quizz/totalTime'],
-      userPoints: ['auth/userPoints']
+      userScore: ['auth/userScore']
     })
   }
 };

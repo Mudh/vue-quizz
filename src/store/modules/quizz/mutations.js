@@ -11,6 +11,7 @@ const setUserScore = (state, score) => {
 const stopQuizz = (state, resetScore) => {
   if (state.isReviveActive && state.totalTime >= 1) {
     state.currentScore = state.stepPoints;
+    state.updatedScore = resetScore + state.currentScore;
     state.questionNumber = 0;
     state.isReviveActive = false;
   } else {
@@ -59,7 +60,7 @@ const incrementQuestion = (state, points) => {
   }
 };
 
-const nextQuestion = (state, { playerAnswer, playerTextValue, userPoints }) => {
+const nextQuestion = (state, { playerAnswer, playerTextValue, userScore }) => {
   const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
 
   // Return on regular answers after fiftyFifty joker
@@ -75,10 +76,10 @@ const nextQuestion = (state, { playerAnswer, playerTextValue, userPoints }) => {
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
   if (togglePoints === 0) {
-    stopQuizz(state, userPoints);
+    stopQuizz(state, userScore);
   } else {
     incrementQuestion(state, togglePoints);
-    state.updatedScore = userPoints + state.currentScore;
+    state.updatedScore = userScore + state.currentScore;
   }
 };
 

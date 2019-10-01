@@ -10,7 +10,7 @@ const jokers = (state) => {
   } return state.user.jokers;
 };
 const isAuthenticated = state => state.idToken !== null;
-const userPoints = (state) => {
+const userScore = (state) => {
   if (!state.user) {
     return false;
   } return state.user.score;
@@ -20,5 +20,5 @@ export default {
   user,
   jokers,
   isAuthenticated,
-  userPoints,
+  userScore,
 };
