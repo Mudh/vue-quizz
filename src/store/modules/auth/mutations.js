@@ -10,7 +10,10 @@ const storeUser = (state, { user, userKey }) => {
 
 const updatePartyCount = (state) => {
   state.user.nb_games -= 1;
-  console.log(state.user);
+};
+
+const updateJokerCount = (state, joker) => {
+  state.user[`joker_${joker}`] -= 1;
 };
 
 
@@ -23,5 +26,6 @@ export default {
   authUser,
   storeUser,
   updatePartyCount,
+  updateJokerCount,
   clearAuthData,
 };

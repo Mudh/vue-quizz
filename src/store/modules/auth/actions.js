@@ -153,6 +153,15 @@ const updatePartyCount = ({ state, commit }) => {
   axios
     .put(`/users/${state.userKey}/nb_games.json?auth=${state.idToken}`, state.user.nb_games)
     .then((res) => {
+      console.log(res);
+    });
+};
+
+const updateJokerCount = ({ state, commit }, joker) => {
+  commit('updateJokerCount', joker);
+  axios
+    .put(`/users/${state.userKey}/joker_${joker}.json?auth=${state.idToken}`, state.user[`joker_${joker}`])
+    .then((res) => {
       console.log(res.data);
     });
 };
@@ -167,4 +176,5 @@ export default {
   logout,
   fetchUser,
   updatePartyCount,
+  updateJokerCount,
 };

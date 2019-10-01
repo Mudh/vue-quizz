@@ -5,6 +5,7 @@ import axios from 'axios';
 const startQuizz = ({ commit, dispatch }, level) => {
   commit('startQuizz');
   dispatch('fetchQuestions', level);
+  dispatch('auth/updatePartyCount', null, { root: true });
 };
 
 const stopQuizz = ({ commit, rootState }) => {
@@ -33,24 +34,28 @@ const updateAnswerValue = ({ commit }, payload) => {
 
 // JOKERS HANDLERS //////////////////////////////////////
 
-const skipQuestion = ({ commit }) => {
+const skipQuestion = ({ commit, dispatch }, evt) => {
   commit('incrementQuestion', 0);
   commit('disableJoker', 'skip');
+  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
 };
 
-const addExtraRun = ({ commit }) => {
+const addExtraRun = ({ commit, dispatch }, evt) => {
   commit('reviveQuizz');
   commit('disableJoker', 'revive');
+  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
 };
 
-const fiftyFifty = ({ commit }) => {
+const fiftyFifty = ({ commit, dispatch }, evt) => {
   commit('fiftyFifty');
   commit('disableJoker', 'fiftyFifty');
+  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
 };
 
-const addExtraTime = ({ commit }) => {
+const addExtraTime = ({ commit, dispatch }, evt) => {
   commit('addExtraTime');
   commit('disableJoker', 'extraTime');
+  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
 };
 
 // FETCH QUESTIONS //////////////////////////////////////
@@ -76,9 +81,10 @@ const fetchLevel = ({ rootState, state }, level) => {
   axios
     .get(`/level.json?auth=${rootState.auth.idToken}`)
     .then((res) => {
-      // From the chosen level set coefficient answer and countdown duration
+    // From the chosen level set coefficient answer and countdown duration
       state.answerCoeff = res.data.find(el => el.alias === level).coeff;
       state.totalTime = res.data.find(el => el.alias === level).duration;
+    // state.totalTime = 10;
     })
     .catch(error => console.log(error));
 };

@@ -30,17 +30,17 @@
       </fieldset>
     </form>
     <footer class="quizz__footer">
-      <button class="joker" :disabled="isSkipDisabled" @click="skipQuestion">
+      <button class="joker" name="skip" :disabled="isSkipDisabled" @click="skipQuestion">
         <Skip />
       </button>
-      <button class="joker" :disabled="isReviveDisabled" @click="addExtraRun">
+      <button class="joker" name="revive" :disabled="isReviveDisabled" @click="addExtraRun">
         <Revive />
       </button>
       <button class="stop" @click="stopQuizz">STOP</button>
-      <button class="joker" :disabled="isFiftyfiftyDisabled" @click="fiftyFifty">
+      <button class="joker" name="5050" :disabled="isFiftyfiftyDisabled" @click="fiftyFifty">
         <FiftyFifty />
       </button>
-      <button class="joker" :disabled="isTimerDisabled" @click="addExtraTime">
+      <button class="joker" name="timer" :disabled="isTimerDisabled" @click="addExtraTime">
         <Timer />
       </button>
     </footer>
