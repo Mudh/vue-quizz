@@ -51,16 +51,18 @@ const startQuizz = (state, level) => {
   startCountdown(state);
 };
 
-const incrementQuestion = (state, points) => {
+const incrementQuestion = (state, points, userScore) => {
   if (state.questionNumber === 4) {
     state.stepNumber += 1;
     state.questionNumber = 0;
     state.currentScore += points;
     state.stepScore = state.currentScore;
+    state.updatedScore = userScore + state.currentScore;
     state.disabledJoker.fiftyFifty = !(state.stepNumber === 2);
   } else {
     state.questionNumber += 1;
     state.currentScore += points;
+    state.updatedScore = userScore + state.currentScore;
   }
 };
 
@@ -86,14 +88,13 @@ const nextQuestion = (state, {
     : answer[0].answer.toLowerCase() === playerTextValue.toLowerCase();
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
-  if (togglePoints === 0) stopQuizz(state, userScore);
-
-  if (isQuizzEnding) {
+  if (togglePoints === 0) {
+    stopQuizz(state, userScore);
+  } else if (isQuizzEnding) {
     endingQuizz(state, userScore + state.currentScore);
   } else {
-    incrementQuestion(state, togglePoints);
+    incrementQuestion(state, togglePoints, userScore);
   }
-  state.updatedScore = userScore + state.currentScore;
 };
 
 // Step 3 answer input
