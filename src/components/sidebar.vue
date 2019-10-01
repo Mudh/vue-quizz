@@ -30,8 +30,8 @@
           <li class="sidebar__items">
             <Revive />
             <span class="item">
-              x{{jokers.revive}}
-              <span>Revive</span>
+              x{{jokers.extraRun}}
+              <span>Extra run</span>
             </span>
           </li>
           <li class="sidebar__items">
@@ -44,8 +44,8 @@
           <li class="sidebar__items">
             <Timer />
             <span class="item">
-              x{{jokers.timer}}
-              <span>Timer</span>
+              x{{jokers.extraTime}}
+              <span>Extra time</span>
             </span>
           </li>
         </ul>

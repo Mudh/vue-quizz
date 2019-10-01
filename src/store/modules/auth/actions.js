@@ -45,9 +45,9 @@ const storeSignupUser = ({ dispatch, state }, userData) => {
     description: '',
     jokers: {
       fiftyFifty: 2,
-      revive: 2,
+      extraRun: 2,
       skip: 2,
-      timer: 2,
+      extraTime: 2,
     },
     parties: 2,
     score: 0,
@@ -163,7 +163,7 @@ const updatePartyCount = ({ state, commit }) => {
 const updateJokerCount = ({ state, commit }, joker) => {
   commit('updateJokerCount', joker);
   axios
-    .put(`/users/${state.userKey}/joker_${joker}.json?auth=${state.idToken}`, state.user[`joker_${joker}`])
+    .put(`/users/${state.userKey}/jokers/${joker}.json?auth=${state.idToken}`, state.user.jokers[joker])
     .then((res) => {
       console.log(res.data);
     });

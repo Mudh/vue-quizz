@@ -30,17 +30,17 @@
       </fieldset>
     </form>
     <footer class="quizz__footer">
-      <button class="joker" name="skip" :disabled="isSkipDisabled" @click="skipQuestion">
+      <button class="joker" name="skip" :disabled="isSkipDisabled" @click="handleJoker">
         <Skip />
       </button>
-      <button class="joker" name="revive" :disabled="isReviveDisabled" @click="addExtraRun">
+      <button class="joker" name="extraRun" :disabled="isExtraRunDisabled" @click="handleJoker">
         <Revive />
       </button>
       <button class="stop" @click="stopQuizz">STOP</button>
-      <button class="joker" name="5050" :disabled="isFiftyfiftyDisabled" @click="fiftyFifty">
+      <button class="joker" name="fiftyFifty" :disabled="isFiftyfiftyDisabled" @click="handleJoker">
         <FiftyFifty />
       </button>
-      <button class="joker" name="timer" :disabled="isTimerDisabled" @click="addExtraTime">
+      <button class="joker" name="extraTime" :disabled="isExtraTimeDisabled" @click="handleJoker">
         <Timer />
       </button>
     </footer>
@@ -77,9 +77,9 @@ export default {
       answers: 'quizz/answers',
       answerValue: 'quizz/answerValue',
       isSkipDisabled: 'quizz/isSkipDisabled',
-      isReviveDisabled: 'quizz/isReviveDisabled',
+      isExtraRunDisabled: 'quizz/isExtraRunDisabled',
       isFiftyfiftyDisabled: 'quizz/isFiftyfiftyDisabled',
-      isTimerDisabled: 'quizz/isTimerDisabled'
+      isExtraTimeDisabled: 'quizz/isExtraTimeDisabled'
     }),
     answerValue: {
       get() {
@@ -101,10 +101,7 @@ export default {
     },
     ...mapActions({
       stopQuizz: 'quizz/stopQuizz',
-      skipQuestion: 'quizz/skipQuestion',
-      addExtraRun: 'quizz/addExtraRun',
-      fiftyFifty: 'quizz/fiftyFifty',
-      addExtraTime: 'quizz/addExtraTime'
+      handleJoker: 'quizz/handleJoker'
     })
   }
 };

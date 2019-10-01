@@ -6,35 +6,6 @@ const setUserScore = (state, score) => {
   state.updatedScore = score;
 };
 
-// JOKERS MUTATIONS //////////////////////////////////////////
-
-// Restart quizz from the last current step on a wrong answer
-const reviveQuizz = (state) => {
-  state.isReviveActive = true;
-};
-
-// Remove 2 wrong answers
-const fiftyFifty = (state) => {
-  const { answer } = state.quizzQuestions.step2[state.questionNumber];
-
-  const filteredAnswers = shuffle([
-    ...answer.filter(item => item.is_correct === true),
-    answer.filter(
-      item => item.is_correct === false,
-    )[0],
-  ]);
-  state.filteredAnswers = [...filteredAnswers];
-};
-
-const addExtraTime = (state) => {
-  state.totalTime += 30;
-};
-
-// Global mutation for all jokers buttons
-const disableJoker = (state, jokerName) => {
-  state.disabledJoker[jokerName] = true;
-};
-
 // QUIZZ MUTATIONS //////////////////////////////////////////
 
 const stopQuizz = (state, resetScore) => {
@@ -116,6 +87,40 @@ const updateAnswerValue = (state, value) => {
   state.answerValue = value;
 };
 
+// JOKERS MUTATIONS //////////////////////////////////////////
+
+// Skip question
+const skip = (state) => {
+  incrementQuestion(state, 0);
+};
+
+// Restart quizz from the last current step on a wrong answer
+const extraRun = (state) => {
+  state.isReviveActive = true;
+};
+
+// Remove 2 wrong answers
+const fiftyFifty = (state) => {
+  const { answer } = state.quizzQuestions.step2[state.questionNumber];
+
+  const filteredAnswers = shuffle([
+    ...answer.filter(item => item.is_correct === true),
+    answer.filter(
+      item => item.is_correct === false,
+    )[0],
+  ]);
+  state.filteredAnswers = [...filteredAnswers];
+};
+
+const extraTime = (state) => {
+  state.totalTime += 30;
+};
+
+// Global mutation for all jokers buttons
+const disableJoker = (state, jokerName) => {
+  state.disabledJoker[jokerName] = true;
+};
+
 export default {
   setUserScore,
   startQuizz,
@@ -124,8 +129,9 @@ export default {
   stopQuizz,
   resetCountdown,
   incrementQuestion,
-  reviveQuizz,
+  skip,
+  extraRun,
   fiftyFifty,
-  addExtraTime,
+  extraTime,
   disableJoker
 };

@@ -40,27 +40,9 @@ const updateAnswerValue = ({ commit }, payload) => {
 
 // JOKERS HANDLERS //////////////////////////////////////
 
-const skipQuestion = ({ commit, dispatch }, evt) => {
-  commit('incrementQuestion', 0);
-  commit('disableJoker', 'skip');
-  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
-};
-
-const addExtraRun = ({ commit, dispatch }, evt) => {
-  commit('reviveQuizz');
-  commit('disableJoker', 'revive');
-  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
-};
-
-const fiftyFifty = ({ commit, dispatch }, evt) => {
-  commit('fiftyFifty');
-  commit('disableJoker', 'fiftyFifty');
-  dispatch('auth/updateJokerCount', evt.target.name, { root: true });
-};
-
-const addExtraTime = ({ commit, dispatch }, evt) => {
-  commit('addExtraTime');
-  commit('disableJoker', 'extraTime');
+const handleJoker = ({ commit, dispatch }, evt) => {
+  commit(evt.target.name);
+  commit('disableJoker', evt.target.name);
   dispatch('auth/updateJokerCount', evt.target.name, { root: true });
 };
 
@@ -102,10 +84,7 @@ export default {
   resetCountdown,
   nextQuestion,
   updateAnswerValue,
+  handleJoker,
   fetchQuestions,
   fetchLevel,
-  skipQuestion,
-  addExtraRun,
-  fiftyFifty,
-  addExtraTime
 };

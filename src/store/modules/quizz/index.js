@@ -18,7 +18,7 @@ const state = {
   radioKey: 0,
   disabledJoker: {
     skip: false,
-    revive: false,
+    extraRun: false,
     fiftyFifty: true,
     extraTime: false
   }

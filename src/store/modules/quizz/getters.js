@@ -42,9 +42,9 @@ const updatedScore = state => state.updatedScore;
 
 // Jokers ===========================================
 const isSkipDisabled = state => state.disabledJoker.skip;
-const isReviveDisabled = state => state.disabledJoker.revive;
+const isExtraRunDisabled = state => state.disabledJoker.extraRun;
 const isFiftyfiftyDisabled = state => state.disabledJoker.fiftyFifty;
-const isTimerDisabled = state => state.disabledJoker.extraTime;
+const isExtraTimeDisabled = state => state.disabledJoker.extraTime;
 
 export default {
   isQuizzStart,
@@ -60,7 +60,7 @@ export default {
   currentScore,
   updatedScore,
   isSkipDisabled,
-  isReviveDisabled,
+  isExtraRunDisabled,
   isFiftyfiftyDisabled,
-  isTimerDisabled,
+  isExtraTimeDisabled,
 };
