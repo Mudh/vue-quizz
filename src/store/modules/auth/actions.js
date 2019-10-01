@@ -43,12 +43,14 @@ const storeSignupUser = ({ dispatch, state }, userData) => {
     firstname: '',
     lastname: '',
     description: '',
-    joker_5050: 2,
-    joker_revive: 2,
-    joker_skip: 2,
-    joker_timer: 2,
-    nb_games: 2,
-    nb_points: 0,
+    jokers: {
+      fiftyFifty: 2,
+      revive: 2,
+      skip: 2,
+      timer: 2,
+    },
+    parties: 2,
+    score: 0,
   };
   axios
     .post(`/users.json?auth=${state.idToken}`, user)
@@ -104,6 +106,7 @@ const fetchUser = ({ state, dispatch }, val) => {
       const user = Object.values(res.data)[0];
       const userKey = Object.keys(res.data)[0];
       dispatch('storeUser', { user, userKey });
+      dispatch('quizz/setUserScore', user.score, { root: true });
     });
 };
 
@@ -151,7 +154,7 @@ const logout = ({ commit }) => {
 const updatePartyCount = ({ state, commit }) => {
   commit('updatePartyCount');
   axios
-    .put(`/users/${state.userKey}/nb_games.json?auth=${state.idToken}`, state.user.nb_games)
+    .put(`/users/${state.userKey}/parties.json?auth=${state.idToken}`, state.user.parties)
     .then((res) => {
       console.log(res);
     });

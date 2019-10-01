@@ -1,5 +1,11 @@
 import { shuffle } from '../../../utils/utils';
 
+// MISCELLANEOUS MUTATIONS //////////////////////////////////////////
+
+const setUserScore = (state, score) => {
+  state.updatedScore = score;
+};
+
 // JOKERS MUTATIONS //////////////////////////////////////////
 
 // Restart quizz from the last current step on a wrong answer
@@ -31,9 +37,9 @@ const disableJoker = (state, jokerName) => {
 
 // QUIZZ MUTATIONS //////////////////////////////////////////
 
-const stopQuizz = (state, resetPoints) => {
+const stopQuizz = (state, resetScore) => {
   if (state.isReviveActive && state.totalTime >= 1) {
-    state.currentPoints = state.stepPoints;
+    state.currentScore = state.stepPoints;
     state.questionNumber = 0;
     state.isReviveActive = false;
   } else {
@@ -41,8 +47,8 @@ const stopQuizz = (state, resetPoints) => {
     state.stepNumber = 1;
     state.questionNumber = 0;
     state.totalTime = null;
-    state.updatedPoints = resetPoints;
-    state.currentPoints = 0;
+    state.updatedScore = resetScore;
+    state.currentScore = 0;
   }
 };
 
@@ -73,12 +79,12 @@ const incrementQuestion = (state, points) => {
   if (state.questionNumber === 4) {
     state.stepNumber += 1;
     state.questionNumber = 0;
-    state.currentPoints += points;
-    state.stepPoints = state.currentPoints;
+    state.currentScore += points;
+    state.stepPoints = state.currentScore;
     state.disabledJoker.fiftyFifty = !(state.stepNumber === 2);
   } else {
     state.questionNumber += 1;
-    state.currentPoints += points;
+    state.currentScore += points;
   }
 };
 
@@ -101,7 +107,7 @@ const nextQuestion = (state, { playerAnswer, playerTextValue, userPoints }) => {
     stopQuizz(state, userPoints);
   } else {
     incrementQuestion(state, togglePoints);
-    state.updatedPoints = userPoints + state.currentPoints;
+    state.updatedScore = userPoints + state.currentScore;
   }
 };
 
@@ -111,6 +117,7 @@ const updateAnswerValue = (state, value) => {
 };
 
 export default {
+  setUserScore,
   startQuizz,
   nextQuestion,
   updateAnswerValue,

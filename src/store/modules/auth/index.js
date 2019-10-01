@@ -6,7 +6,7 @@ const state = {
   idToken: null,
   userId: null,
   userKey: null,
-  user: null,
+  user: {},
 };
 
 export default {

@@ -37,8 +37,8 @@ const minutes = state => padTime(Math.floor(state.totalTime / 60));
 const seconds = state => padTime(state.totalTime - minutes(state) * 60);
 
 // Player score =====================================
-const currentPoints = state => state.currentPoints;
-const updatedPoints = state => state.updatedPoints;
+const currentScore = state => state.currentScore;
+const updatedScore = state => state.updatedScore;
 
 // Jokers ===========================================
 const isSkipDisabled = state => state.disabledJoker.skip;
@@ -57,8 +57,8 @@ export default {
   totalTime,
   minutes,
   seconds,
-  currentPoints,
-  updatedPoints,
+  currentScore,
+  updatedScore,
   isSkipDisabled,
   isReviveDisabled,
   isFiftyfiftyDisabled,

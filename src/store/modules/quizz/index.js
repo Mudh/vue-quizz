@@ -11,9 +11,9 @@ const state = {
   answerValue: '',
   answerCoeff: null,
   totalTime: null,
-  currentPoints: 0,
+  currentScore: 0,
   stepPoints: 0,
-  updatedPoints: 0,
+  updatedScore: 0,
   isReviveActive: false,
   radioKey: 0,
   disabledJoker: {

@@ -9,7 +9,7 @@ const storeUser = (state, { user, userKey }) => {
 };
 
 const updatePartyCount = (state) => {
-  state.user.nb_games -= 1;
+  state.user.parties -= 1;
 };
 
 const updateJokerCount = (state, joker) => {

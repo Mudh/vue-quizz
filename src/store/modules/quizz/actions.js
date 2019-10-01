@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+// QUIZZ MISCELLANEOUS //////////////////////////////////////
+
+const setUserScore = ({ commit, rootState }) => {
+  commit('setUserScore', rootState.auth.user.score);
+};
+
 // QUIZZ HANDLERS //////////////////////////////////////
 
 const startQuizz = ({ commit, dispatch }, level) => {
@@ -9,7 +15,7 @@ const startQuizz = ({ commit, dispatch }, level) => {
 };
 
 const stopQuizz = ({ commit, rootState }) => {
-  commit('stopQuizz', rootState.auth.user.nb_points);
+  commit('stopQuizz', rootState.auth.user.score);
 };
 
 const resetCountdown = ({ commit }) => {
@@ -18,7 +24,7 @@ const resetCountdown = ({ commit }) => {
 
 const nextQuestion = ({ commit, rootState }, playerAnswer) => {
   const playerTextValue = rootState.quizz.answerValue;
-  const userPoints = rootState.auth.user.nb_points;
+  const userPoints = rootState.auth.user.score;
 
   // Check answer type (step 1/2 boolean, step 3 string) to commit differents mutations
   if (typeof playerAnswer === 'boolean') {
@@ -90,6 +96,7 @@ const fetchLevel = ({ rootState, state }, level) => {
 };
 
 export default {
+  setUserScore,
   startQuizz,
   stopQuizz,
   resetCountdown,

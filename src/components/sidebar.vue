@@ -7,14 +7,14 @@
           <li class="sidebar__items">
             <Credits />
             <span class="item">
-              x{{user.nb_games}}
+              x{{user.parties}}
               <span>Parties</span>
             </span>
           </li>
           <li class="sidebar__items">
             <Score />
             <span class="item">
-              {{updatedPoints}}
+              {{updatedScore}}
               <span>Points</span>
             </span>
           </li>
@@ -23,28 +23,28 @@
           <li class="sidebar__items">
             <Skip />
             <span class="item">
-              x{{user.joker_skip}}
+              x{{jokers.skip}}
               <span>Skip</span>
             </span>
           </li>
           <li class="sidebar__items">
             <Revive />
             <span class="item">
-              x{{user.joker_revive}}
+              x{{jokers.revive}}
               <span>Revive</span>
             </span>
           </li>
           <li class="sidebar__items">
             <FiftyFifty />
             <span class="item">
-              x{{user.joker_5050}}
+              x{{jokers.fiftyFifty}}
               <span>50/50</span>
             </span>
           </li>
           <li class="sidebar__items">
             <Timer />
             <span class="item">
-              x{{user.joker_timer}}
+              x{{jokers.timer}}
               <span>Timer</span>
             </span>
           </li>
@@ -83,8 +83,9 @@ export default {
   computed: {
     ...mapGetters({
       user: 'auth/user',
+      jokers: 'auth/jokers',
       isQuizzStart: 'quizz/isQuizzStart',
-      updatedPoints: 'quizz/updatedPoints'
+      updatedScore: 'quizz/updatedScore'
     })
   }
 };
