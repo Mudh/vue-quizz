@@ -22,15 +22,15 @@ const resetCountdown = ({ commit }) => {
   commit('resetCountdown');
 };
 
-const nextQuestion = ({ commit, rootState }, playerAnswer) => {
+const nextQuestion = ({ commit, rootState }, { playerAnswer, isQuizzEnding }) => {
   const playerTextValue = rootState.quizz.answerValue;
   const userScore = rootState.auth.user.score;
 
   // Check answer type (step 1/2 boolean, step 3 string) to commit differents mutations
   if (typeof playerAnswer === 'boolean') {
-    commit('nextQuestion', { playerAnswer, userScore });
+    commit('nextQuestion', { playerAnswer, userScore, isQuizzEnding });
   } else {
-    commit('nextQuestion', { playerTextValue, userScore });
+    commit('nextQuestion', { playerTextValue, userScore, isQuizzEnding });
   }
 };
 

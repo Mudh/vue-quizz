@@ -12,7 +12,7 @@ const state = {
   answerCoeff: null,
   totalTime: null,
   currentScore: 0,
-  stepPoints: 0,
+  stepScore: 0,
   updatedScore: 0,
   isReviveActive: false,
   radioKey: 0,

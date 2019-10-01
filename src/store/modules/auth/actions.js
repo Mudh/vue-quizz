@@ -169,6 +169,15 @@ const updateJokerCount = ({ state, commit }, joker) => {
     });
 };
 
+const updateScore = ({ state, commit, rootState }) => {
+  commit('updateScore', rootState.quizz.updatedScore);
+  axios
+    .put(`/users/${state.userKey}/score.json?auth=${state.idToken}`, state.user.score)
+    .then((res) => {
+      console.log(res.data);
+    });
+};
+
 export default {
   setLogoutTimer,
   signup,
@@ -180,4 +189,5 @@ export default {
   fetchUser,
   updatePartyCount,
   updateJokerCount,
+  updateScore,
 };

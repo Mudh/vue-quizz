@@ -8,19 +8,23 @@ const setUserScore = (state, score) => {
 
 // QUIZZ MUTATIONS //////////////////////////////////////////
 
+const resetQuizz = (state, score) => {
+  state.isQuizzStart = false;
+  state.stepNumber = 1;
+  state.questionNumber = 0;
+  state.totalTime = null;
+  state.updatedScore = score;
+  state.currentScore = 0;
+};
+
 const stopQuizz = (state, resetScore) => {
   if (state.isReviveActive && state.totalTime >= 1) {
-    state.currentScore = state.stepPoints;
+    state.currentScore = state.stepScore;
     state.updatedScore = resetScore + state.currentScore;
     state.questionNumber = 0;
     state.isReviveActive = false;
   } else {
-    state.isQuizzStart = false;
-    state.stepNumber = 1;
-    state.questionNumber = 0;
-    state.totalTime = null;
-    state.updatedScore = resetScore;
-    state.currentScore = 0;
+    resetQuizz(state, resetScore);
   }
 };
 
@@ -52,7 +56,7 @@ const incrementQuestion = (state, points) => {
     state.stepNumber += 1;
     state.questionNumber = 0;
     state.currentScore += points;
-    state.stepPoints = state.currentScore;
+    state.stepScore = state.currentScore;
     state.disabledJoker.fiftyFifty = !(state.stepNumber === 2);
   } else {
     state.questionNumber += 1;
@@ -60,13 +64,20 @@ const incrementQuestion = (state, points) => {
   }
 };
 
-const nextQuestion = (state, { playerAnswer, playerTextValue, userScore }) => {
+const endingQuizz = (state, finalScore) => {
+  resetQuizz(state, finalScore);
+};
+
+const nextQuestion = (state, {
+  playerAnswer,
+  playerTextValue,
+  userScore,
+  isQuizzEnding
+}) => {
   const { points, answer } = state.quizzQuestions[`step${state.stepNumber}`][state.questionNumber];
 
   // Return on regular answers after fiftyFifty joker
-  if (state.filteredAnswers.length > 0) {
-    state.filteredAnswers = [];
-  }
+  if (state.filteredAnswers.length > 0) state.filteredAnswers = [];
 
   // Switch answer from steps 1/2 (input radio) and step 3 (input text)
   // and compare string answers on the last step
@@ -75,12 +86,14 @@ const nextQuestion = (state, { playerAnswer, playerTextValue, userScore }) => {
     : answer[0].answer.toLowerCase() === playerTextValue.toLowerCase();
   const togglePoints = isCorrectAnswer ? points * state.answerCoeff : 0;
 
-  if (togglePoints === 0) {
-    stopQuizz(state, userScore);
+  if (togglePoints === 0) stopQuizz(state, userScore);
+
+  if (isQuizzEnding) {
+    endingQuizz(state, userScore + state.currentScore);
   } else {
     incrementQuestion(state, togglePoints);
-    state.updatedScore = userScore + state.currentScore;
   }
+  state.updatedScore = userScore + state.currentScore;
 };
 
 // Step 3 answer input

@@ -16,6 +16,10 @@ const updateJokerCount = (state, joker) => {
   state.user[`joker_${joker}`] -= 1;
 };
 
+const updateScore = (state, score) => {
+  state.user.score = score;
+};
+
 
 const clearAuthData = (state) => {
   state.idToken = null;
@@ -27,5 +31,6 @@ export default {
   storeUser,
   updatePartyCount,
   updateJokerCount,
+  updateScore,
   clearAuthData,
 };

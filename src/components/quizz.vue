@@ -91,12 +91,24 @@ export default {
     }
   },
   methods: {
-    handleNextQuestion(isCorrectAnswer) {
+    handleNextQuestion(playerAnswer) {
       // The time out helps the user to notice the checked answer
       // in order to improve ux/ui experience
       setTimeout(() => {
         this.checkedAnswer = false;
-        this.$store.dispatch('quizz/nextQuestion', isCorrectAnswer);
+        const isQuizzEnding = this.step === 3 && this.questionNumber === 5;
+        if (isQuizzEnding) {
+          this.$store.dispatch('auth/updateScore');
+          this.$store.dispatch('quizz/nextQuestion', {
+            playerAnswer,
+            isQuizzEnding
+          });
+        } else {
+          this.$store.dispatch('quizz/nextQuestion', {
+            playerAnswer,
+            isQuizzEnding: false
+          });
+        }
       }, 150);
     },
     ...mapActions({
