@@ -64,7 +64,20 @@ body,
   .home,
   .signup,
   .signin {
-    height: calc(100% - 61px);
+    position: relative;
+    height: calc(100% - 50px);
+
+    &:after {
+      content: '';
+      background: url('./assets/main.png') repeat center center/12px 12px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.2;
+      z-index: -1;
+    }
   }
 }
 </style>

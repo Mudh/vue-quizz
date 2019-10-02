@@ -45,12 +45,27 @@ export default {
 @import '../styles/variables.scss';
 
 header {
-  border-bottom: 1px solid $headerBorder;
+  position: relative;
+  background-color: $mainColor1;
+  z-index: 1;
+
+  &:after {
+    content: '';
+    background: url('../assets/main.png') repeat center center/12px 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: -1;
+  }
 
   ul {
+    position: relative;
     display: flex;
-    background-color: #ffffff;
-    height: 60px;
+    background-color: transparent;
+    height: 50px;
     position: relative;
     padding: 0 rem(20px);
     justify-content: flex-end;
@@ -63,13 +78,29 @@ header {
       font-weight: 500;
 
       a {
-        color: $mainColor2;
+        position: relative;
+        color: $mainColor4;
         text-decoration: none;
+        padding: rem(15) 0;
+
+        &:before {
+          content: '';
+          transform: scaleX(0);
+          transition: transform 0.2s ease-out;
+        }
 
         &:hover,
         &.router-link-exact-active {
-          border-bottom: 3px solid $mainColor1;
-          padding-bottom: 3px;
+          &:before {
+            content: '';
+            background-color: $mainColor2;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            transform: scaleX(1);
+          }
         }
       }
 
@@ -81,13 +112,14 @@ header {
         border-radius: 0;
         background-color: transparent;
         padding: 0;
-        color: $mainColor2;
+        color: $mainColor4;
         font-size: 1em;
         font-family: $mainFont;
         font-weight: 500;
+        margin-top: 0;
 
         &:hover {
-          color: $mainColor1;
+          color: $mainColor4;
         }
       }
     }
